@@ -1,0 +1,174 @@
+/* atfx-peru · navbar + atoms (roll, pill, nav-cta). Maquetación trasladada del Navbar
+   de SparkSummit (logo · pill de links con indicador · CTA), con tokens --aa-* de OSMO. */
+
+/* ─── Roll (label vertical: dos copias apiladas, suben en hover) ───────────────── */
+.aa-landing .aa-roll {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 1.2em;
+  line-height: 1.2;
+  overflow: hidden;
+}
+.aa-landing .aa-roll__item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
+  transition: transform var(--aa-duration-m) var(--aa-ease-out);
+}
+.aa-landing .aa-roll__item:nth-child(2) {
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+/* ─── Pill (eyebrow contenedor) ────────────────────────────────────────────────── */
+.aa-landing .aa-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4em 1em;
+  font-size: var(--aa-text-xxs);
+  font-weight: var(--aa-weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--aa-fg);
+  background: var(--aa-bg-subtle);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius-pill);
+}
+
+/* ─── NavCta (botón pill con roll + flecha) — gradiente azul de marca ATFX ──────── */
+.aa-landing .aa-nav-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  height: 2.8em;
+  padding: 0 1.4em;
+  color: #ffffff;
+  border: 1px solid transparent;
+  border-radius: var(--aa-radius-pill);
+  /* Doble gradiente: cara tintada (padding-box) + borde-gradiente (border-box) */
+  background-image: var(--aa-gradient-cta);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 8px 24px -6px rgba(47, 176, 255, 0.35), inset 0 0 20px rgba(47, 176, 255, 0.1);
+  font-weight: var(--aa-weight-bold);
+  font-size: var(--aa-text-xs);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform var(--aa-duration-s) var(--aa-ease-out),
+    box-shadow var(--aa-duration-s) var(--aa-ease-out);
+}
+.aa-landing .aa-nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px -6px rgba(47, 176, 255, 0.45), inset 0 0 24px rgba(47, 176, 255, 0.15);
+}
+.aa-landing .aa-nav-cta:hover .aa-roll__item { transform: translateY(-100%); }
+
+.aa-landing .aa-nav-cta--standalone {
+  height: 3.375em;
+  padding-left: 1.75em;
+  padding-right: 0.5em;
+  width: auto;
+  justify-content: center;
+}
+@media screen and (max-width: 991px) {
+  .aa-landing .aa-nav-cta--standalone { width: 100%; }
+}
+.aa-landing .aa-nav-cta__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+  flex: none;
+  border-radius: var(--aa-radius-pill);
+  border: 1px solid rgba(47, 176, 255, 0.2);
+  background: rgba(47, 176, 255, 0.12);
+}
+.aa-landing .aa-nav-cta__icon svg { width: 1em; height: 1em; color: var(--aa-color-blue); }
+
+/* ─── Navbar ───────────────────────────────────────────────────────────────────── */
+.aa-landing .aa-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 1.5em 2em 0;
+  font-size: var(--aa-text-xs);
+  pointer-events: none;
+  transition: transform var(--aa-duration-m) var(--aa-ease);
+}
+@media screen and (max-width: 767px) {
+  .aa-landing .aa-nav { padding: 1em 1em 0; }
+}
+.aa-landing .aa-nav[data-aa-hidden="true"] { transform: translateY(-110%); }
+
+.aa-landing .aa-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--aa-gap-xxs);
+  pointer-events: auto;
+}
+
+.aa-landing .aa-nav__links {
+  padding: 0.3em;
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius-pill);
+  background: var(--aa-bg-subtle);
+  background: color-mix(in srgb, var(--aa-bg) 80%, transparent);
+  backdrop-filter: blur(16px);
+  transition: background var(--aa-duration-s), border-color var(--aa-duration-s);
+}
+.aa-landing .aa-nav__links-list {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: var(--aa-radius-pill);
+}
+.aa-landing .aa-nav__indicator {
+  position: absolute;
+  z-index: 0;
+  opacity: 0;
+  border-radius: var(--aa-radius-pill);
+  background: var(--aa-accent);
+  transition:
+    left var(--aa-duration-l) var(--aa-ease-out),
+    top var(--aa-duration-l) var(--aa-ease-out),
+    width var(--aa-duration-l) var(--aa-ease-out),
+    height var(--aa-duration-l) var(--aa-ease-out),
+    opacity var(--aa-duration-s);
+}
+.aa-landing .aa-nav__link {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: 2.2em;
+  padding-inline: 0.85em;
+  overflow: hidden;
+  font-size: var(--aa-text-xxs);
+  font-weight: var(--aa-weight-semibold);
+  color: var(--aa-fg-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--aa-duration-s);
+}
+.aa-landing .aa-nav__link:hover { color: var(--aa-fg); }
+.aa-landing .aa-nav__link:hover .aa-roll__item { transform: translateY(-100%); }
+.aa-landing .aa-nav__link[data-active="true"] { color: var(--aa-accent-fg); }
+
+.aa-landing .aa-nav__cta { display: block; }
+@media screen and (max-width: 767px) {
+  .aa-landing .aa-nav__cta { display: none; }
+}

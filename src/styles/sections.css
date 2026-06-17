@@ -1,0 +1,102 @@
+/* atfx-peru · secciones portadas de Spark (header + learn + about + benefits + faq).
+   Tokens --aa-* de OSMO. */
+
+/* ─── Section header (eyebrow + heading + sub), patrón Spark ───────────────────── */
+.aa-landing .aa-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-s);
+  max-width: 48em;
+}
+.aa-landing .aa-section-header--center {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+.aa-landing .aa-section-header--left {
+  align-items: flex-start;
+  text-align: left;
+}
+.aa-landing .aa-section-header__sub { max-width: 40em; }
+
+/* ─── 5 · Qué aprenderás ───────────────────────────────────────────────────────── */
+.aa-landing .aa-learn__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xl);
+}
+.aa-landing .aa-learn__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--aa-gap-s);
+  padding: var(--aa-padding-s);
+  border: 1px solid var(--aa-border);
+  border-radius: var(--aa-radius-l);
+  background: var(--aa-bg-subtle);
+}
+.aa-landing .aa-learn__num {
+  flex: none;
+  font-size: var(--aa-text-m);
+  font-weight: var(--aa-weight-extrabold);
+  line-height: 1;
+  color: var(--aa-fg);
+}
+.aa-landing .aa-learn__text {
+  font-size: var(--aa-text-s);
+  line-height: var(--aa-leading-normal);
+  color: var(--aa-fg);
+}
+
+/* ─── 7 · Sobre el evento (marquee de imágenes + stats) ────────────────────────── */
+.aa-landing .aa-about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xl);
+}
+.aa-landing .aa-about__photos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xs);
+}
+/* Tile de foto (Masterclass) */
+.aa-landing .aa-photo {
+  width: 16em;
+  aspect-ratio: 1;
+  flex: none;
+  display: block;
+  object-fit: cover;
+  border-radius: var(--aa-radius-l);
+  background: var(--aa-bg-subtle); /* fallback mientras carga */
+}
+.aa-landing .aa-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--aa-gap-xxs);
+  text-align: center;
+}
+.aa-landing .aa-stat__value {
+  font-size: var(--aa-text-l);
+  font-weight: var(--aa-weight-extrabold);
+  line-height: 1;
+  color: var(--aa-fg);
+}
+.aa-landing .aa-stat__label {
+  font-size: var(--aa-text-xs);
+  color: var(--aa-fg-muted);
+}
+
+/* ─── 8 · Beneficios (PillarSlider) ────────────────────────────────────────────── */
+/* El slider aporta el espacio inferior (arco de rotación); la sección no duplica. */
+.aa-landing .aa-benefits { padding-bottom: 0; }
+
+/* ─── 9 · FAQ ──────────────────────────────────────────────────────────────────── */
+.aa-landing .aa-faq__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-l);
+}
+.aa-landing .aa-faq__cta {
+  display: flex;
+  justify-content: center;
+}

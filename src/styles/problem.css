@@ -1,0 +1,49 @@
+/* atfx-peru · sección Problema (hook financiero). Layout del AudienceStrip de Spark:
+   contenido alineado a la izquierda + lista con dots de acento. Tokens --aa-* de OSMO. */
+
+.aa-landing .aa-problem__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--aa-gap-m);
+  text-align: left;
+}
+.aa-landing .aa-problem__content > p { max-width: 44em; }
+
+.aa-landing .aa-problem__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-s);
+}
+.aa-landing .aa-problem__lead {
+  font-size: var(--aa-text-s);
+  font-weight: var(--aa-weight-semibold);
+  color: var(--aa-fg);
+}
+
+/* Lista con dots de acento (patrón del AudienceStrip: dot 0.4em a la izquierda) */
+.aa-landing .aa-problem__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-s);
+}
+.aa-landing .aa-problem__list li {
+  position: relative;
+  padding-left: 1.25em;
+  font-size: var(--aa-text-s);
+  line-height: var(--aa-leading-normal);
+  color: var(--aa-fg-muted);
+}
+.aa-landing .aa-problem__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: var(--aa-radius-pill);
+  background: var(--aa-accent);
+}

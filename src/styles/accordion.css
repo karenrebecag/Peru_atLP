@@ -1,0 +1,74 @@
+/* atfx-peru · accordion (FAQ). Trasladado del Accordion de Spark: panel con animación
+   grid-rows (0fr↔1fr) + chevron que rota. Tokens --aa-* de OSMO. */
+
+.aa-landing .aa-accordion {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xs);
+  width: 100%;
+}
+.aa-landing .aa-accordion__item {
+  overflow: hidden;
+  border-radius: var(--aa-radius-l);
+  background: var(--aa-bg-subtle);
+}
+.aa-landing .aa-accordion__trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--aa-gap-s);
+  padding: var(--aa-padding-xs) var(--aa-padding-s);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--aa-fg);
+}
+.aa-landing .aa-accordion__q {
+  font-size: var(--aa-text-s);
+  font-weight: var(--aa-weight-bold);
+  line-height: var(--aa-leading-snug);
+  color: var(--aa-fg);
+}
+.aa-landing .aa-accordion__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2em;
+  height: 2em;
+  border-radius: var(--aa-radius-pill);
+  background: var(--aa-border);
+  color: var(--aa-fg);
+  transform: rotate(180deg);
+  transition:
+    transform var(--aa-duration-m) var(--aa-ease),
+    background var(--aa-duration-m) var(--aa-ease),
+    color var(--aa-duration-m) var(--aa-ease);
+}
+.aa-landing .aa-accordion__icon svg { width: 1em; height: 1em; }
+.aa-landing .aa-accordion__item[data-open="true"] .aa-accordion__icon {
+  transform: rotate(0deg);
+  background: var(--aa-accent);
+  color: var(--aa-accent-fg);
+}
+.aa-landing .aa-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--aa-duration-m) var(--aa-ease);
+}
+.aa-landing .aa-accordion__item[data-open="true"] .aa-accordion__panel {
+  grid-template-rows: 1fr;
+}
+.aa-landing .aa-accordion__panel-inner { overflow: hidden; }
+.aa-landing .aa-accordion__a {
+  padding: 0 var(--aa-padding-s) var(--aa-padding-s);
+  font-size: var(--aa-text-xs);
+  line-height: var(--aa-leading-normal);
+  color: var(--aa-fg-muted);
+}

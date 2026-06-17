@@ -1,0 +1,58 @@
+/* atom-academy · landing page design system (OSMO-inspired, token-based). */
+/* Índice: esbuild inlinea estos @import en un solo dist/landing.css.          */
+/* Toda la especificidad vive bajo .aa-landing para no colisionar con Elementor. */
+
+@import "./tokens.css";
+@import "./typography.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./navbar.css";
+@import "./scroll-progress.css";
+@import "./hero.css";
+@import "./countdown.css";
+@import "./problem.css";
+@import "./sections.css";
+@import "./speakers.css";
+@import "./pillar-slider.css";
+@import "./accordion.css";
+@import "./footer.css";
+@import "./form.css";
+@import "./section-theme.css";
+
+/* ─── Root wrapper ────────────────────────────────────────────────────────────── */
+.aa-landing {
+  font-family: var(--aa-font);
+  font-size: var(--aa-size-font);
+  color: var(--aa-fg);
+  background: var(--aa-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Contiene cualquier overflow horizontal (p. ej. del form embebido) sin crear
+     scroll vertical ni afectar el nav fijo. clip = no establece scroll container. */
+  overflow-x: clip;
+}
+
+/* Reset de márgenes UA en texto: el ritmo vertical lo controlan los tokens (gap),
+   no los márgenes em-based del navegador (que en flex no colapsan y se acumulan). */
+.aa-landing :where(h1, h2, h3, h4, h5, h6, p) {
+  margin: 0;
+}
+
+/* Dark theme global + section themes (strips) viven en section-theme.css. */
+
+/* ─── Utilities ───────────────────────────────────────────────────────────────── */
+.aa-landing .aa-text-center  { text-align: center; }
+.aa-landing .aa-text-balance { text-wrap: balance; }
+.aa-landing .aa-text-accent  { color: var(--aa-accent); }
+.aa-landing .aa-text-gradient {
+  background-image: var(--aa-gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.aa-landing .aa-flex-col     { display: flex; flex-direction: column; }
+.aa-landing .aa-flex-center  { display: flex; align-items: center; justify-content: center; }
+.aa-landing .aa-gap-s        { gap: var(--aa-gap-s); }
+.aa-landing .aa-gap-m        { gap: var(--aa-gap-m); }
+.aa-landing .aa-gap-l        { gap: var(--aa-gap-l); }

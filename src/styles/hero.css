@@ -1,0 +1,91 @@
+/* atfx-peru · hero (banner). Base del HeroStrip de SparkSummit: video bg + overlay,
+   columna única de texto. Desktop-first (breakpoints del proyecto: 991/767/479) y
+   tokens --aa-* de OSMO. */
+
+.aa-landing .aa-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52vh; /* hero compacto; sin token equivalente */
+  overflow: hidden;
+  isolation: isolate;
+  padding-block: calc(var(--aa-nav-height) + var(--aa-padding-l)) var(--aa-padding-xl);
+}
+
+/* Fondo: video loop muteado + overlay degradado (como el HeroStrip de Spark) */
+.aa-landing .aa-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--aa-bg); /* fallback mientras carga el video */
+}
+.aa-landing .aa-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.5);
+  pointer-events: none;
+}
+.aa-landing .aa-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.45));
+}
+
+/* Contenedor interno: columna única de texto */
+.aa-landing .aa-hero__grid {
+  position: relative;
+  width: 100%;
+  max-width: var(--aa-container-max);
+  margin-inline: auto;
+  padding-inline: var(--aa-container-pad);
+}
+
+/* Columna izquierda: alineada a la izquierda en desktop, centrada en tablet/mobile */
+.aa-landing .aa-hero__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--aa-gap-s);
+  text-align: left;
+}
+@media screen and (max-width: 991px) {
+  .aa-landing .aa-hero__left {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.aa-landing .aa-hero__title { max-width: 14em; }
+
+.aa-landing .aa-hero__sub {
+  max-width: 32em;
+  font-size: var(--aa-text-s);
+  line-height: var(--aa-leading-normal);
+  color: var(--aa-fg-muted);
+}
+
+/* Detalles del evento: fecha/horario (énfasis) + modalidad/lugar (muted) */
+.aa-landing .aa-hero__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xxs);
+  font-size: var(--aa-text-xs);
+}
+.aa-landing .aa-hero__detail { color: var(--aa-fg-muted); }
+.aa-landing .aa-hero__detail--strong {
+  color: var(--aa-fg);
+  font-weight: var(--aa-weight-semibold);
+}
+
+.aa-landing .aa-hero__cta {
+  margin-top: var(--aa-gap-xs);
+  width: auto;
+}
+@media screen and (max-width: 991px) {
+  .aa-landing .aa-hero__cta { width: 100%; }
+}
