@@ -1,6 +1,8 @@
-// 5 · Qué aprenderás — header (patrón Spark) + grid de puntos numerados.
+// 5 · Qué aprenderás — header + lista numerada con directional-hover (filas con
+// número + tema, tile cian que entra desde la dirección del cursor). Trasladado del
+// agenda-strip interactivo de la referencia ATFX.
 
-import { renderContainer, renderGrid } from '../ui/layout';
+import { renderContainer } from '../ui/layout';
 import { renderSectionHeader } from '../ui/section-header';
 import { LEARN_POINTS } from '../constants/content';
 
@@ -18,27 +20,43 @@ export function renderLearnSection(root: Element): void {
     highlight: 'aprenderás',
   });
 
-  const items = LEARN_POINTS.map((text, i) => {
-    const item = document.createElement('div');
-    item.className = 'aa-learn__item';
+  const list = document.createElement('div');
+  list.className = 'aa-learn__list';
+  list.setAttribute('data-directional-hover', '');
+  list.setAttribute('data-type', 'y');
+  list.setAttribute('data-aa-fade', '');
+
+  LEARN_POINTS.forEach((text, i) => {
+    const row = document.createElement('div');
+    row.className = 'aa-learn__row';
+    row.setAttribute('data-directional-hover-item', '');
+
+    const tile = document.createElement('div');
+    tile.className = 'aa-learn__tile';
+    tile.setAttribute('data-directional-hover-tile', '');
+
+    const border = document.createElement('div');
+    border.className = 'aa-learn__border';
 
     const num = document.createElement('span');
     num.className = 'aa-learn__num';
     num.textContent = String(i + 1).padStart(2, '0');
 
-    const p = document.createElement('p');
-    p.className = 'aa-learn__text';
-    p.textContent = text;
+    const topic = document.createElement('p');
+    topic.className = 'aa-learn__topic';
+    topic.textContent = text;
 
-    item.append(num, p);
-    return item;
+    row.append(tile, border, num, topic);
+    list.appendChild(row);
   });
 
-  const grid = renderGrid({ cols: 2, className: 'aa-learn__grid', attrs: { 'data-aa-fade': '' }, children: items });
+  const borderBottom = document.createElement('div');
+  borderBottom.className = 'aa-learn__border-bottom';
+  list.appendChild(borderBottom);
 
   const inner = document.createElement('div');
   inner.className = 'aa-learn__inner';
-  inner.append(header, grid);
+  inner.append(header, list);
 
   section.appendChild(renderContainer({ size: 'm', children: [inner] }));
   root.appendChild(section);

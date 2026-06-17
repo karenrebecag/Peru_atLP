@@ -10,7 +10,7 @@ export function renderCountdownSection(root: Element): void {
   const section = document.createElement('section');
   section.className = 'aa-countdown-section';
   section.id = 'registro'; // ancla del nav "Registro"
-  section.setAttribute('data-aa-section-theme', 'light');
+  section.setAttribute('data-aa-section-theme', 'dark');
   section.setAttribute('data-aa-nav-anchor', '');
 
   const inner = document.createElement('div');

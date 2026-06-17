@@ -35,6 +35,14 @@ export function renderSpeakerCard(s: SpeakerData): HTMLElement {
   company.textContent = s.company;
 
   meta.append(name, role, company);
+
+  if (s.bio) {
+    const bio = document.createElement('p');
+    bio.className = 'aa-speaker-card__bio';
+    bio.textContent = s.bio;
+    meta.appendChild(bio);
+  }
+
   card.append(avatar, meta);
   return card;
 }

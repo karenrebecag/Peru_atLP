@@ -4,14 +4,17 @@
 //        data-aa-lang="es|en"></div>
 //
 //   <script data-cfasync="false"
-//     src="https://cdn.jsdelivr.net/gh/karenrebecag/Academy_LP@latest/loader.js"></script>
-const _v = document.querySelector<HTMLScriptElement>('script[src*="Academy_LP@"]')?.src.match(/Academy_LP@([^/]+)/)?.[1] ?? 'dev';
-console.log(`[academy-lp] v${_v} loaded`);
+//     src="https://cdn.jsdelivr.net/gh/karenrebecag/Peru_atLP@latest/loader.js"></script>
+const _v = document.querySelector<HTMLScriptElement>('script[src*="Peru_atLP@"]')?.src.match(/Peru_atLP@([^/]+)/)?.[1] ?? 'dev';
+console.log(`[atfx-peru-lp] v${_v} loaded`);
 
 import { type Theme, type Lang } from './core/types';
 import { initMotion } from './ui/motion';
 import { renderNavbar, initNavbar } from './ui/navbar';
 import { renderScrollProgress, initScrollProgress } from './ui/scroll-progress';
+import { initSpline } from './ui/spline';
+import { initParallax } from './ui/parallax';
+import { initDirectionalHover } from './ui/directional-hover';
 import { renderHero } from './sections/hero';
 import { renderCountdownSection } from './sections/countdown';
 import { renderFormSection, initAtfxForm } from './sections/form';
@@ -78,6 +81,9 @@ function boot(): void {
     initMotion(root);
     initNavbar(root);
     initScrollProgress(root);
+    initSpline();
+    initParallax(root);
+    initDirectionalHover(root);
     initAccordion(root);
     initPillarSlider(root);
     initAtfxForm();

@@ -7,8 +7,20 @@ import {
   ATFX_LOGO_SRC,
   FOOTER_GROUPS,
   FOOTER_SOCIALS,
+  BLUEMAKERS_SOCIALS,
   FOOTER_LEGAL,
 } from '../constants/footer';
+
+function renderSocialLink({ label, href, icon, fill }: { label: string; href: string; icon: string; fill: boolean }): HTMLAnchorElement {
+  const a = document.createElement('a');
+  a.className = 'aa-footer__social';
+  a.href = href;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.setAttribute('aria-label', label);
+  a.innerHTML = `<svg viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="${fill ? 'none' : 'currentColor'}" stroke-width="${fill ? 0 : 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon}</svg>`;
+  return a;
+}
 
 export function renderFooterSection(root: Element): void {
   const section = document.createElement('section');
@@ -68,18 +80,20 @@ export function renderFooterSection(root: Element): void {
   socialEyebrow.textContent = '( Redes )';
   const socials = document.createElement('div');
   socials.className = 'aa-footer__socials';
-  FOOTER_SOCIALS.forEach(({ label, href, icon, fill }) => {
-    const a = document.createElement('a');
-    a.className = 'aa-footer__social';
-    a.href = href;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.setAttribute('aria-label', label);
-    a.innerHTML = `<svg viewBox="0 0 24 24" fill="${fill ? 'currentColor' : 'none'}" stroke="${fill ? 'none' : 'currentColor'}" stroke-width="${fill ? 0 : 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon}</svg>`;
-    socials.appendChild(a);
-  });
+  FOOTER_SOCIALS.forEach((s) => socials.appendChild(renderSocialLink(s)));
   socialCol.append(socialEyebrow, socials);
   cols.appendChild(socialCol);
+
+  // Co-brand: redes del aliado Blue Makers
+  const cobrand = document.createElement('div');
+  cobrand.className = 'aa-footer__cobrand';
+  const cobrandLabel = document.createElement('p');
+  cobrandLabel.className = 'aa-footer__eyebrow';
+  cobrandLabel.textContent = 'Síguenos también en Blue Makers';
+  const cobrandSocials = document.createElement('div');
+  cobrandSocials.className = 'aa-footer__socials';
+  BLUEMAKERS_SOCIALS.forEach((s) => cobrandSocials.appendChild(renderSocialLink(s)));
+  cobrand.append(cobrandLabel, cobrandSocials);
 
   // Disclaimer legal
   const legal = document.createElement('div');
@@ -90,7 +104,7 @@ export function renderFooterSection(root: Element): void {
 
   const inner = document.createElement('div');
   inner.className = 'aa-footer__inner';
-  inner.append(top, cols, legal);
+  inner.append(top, cols, cobrand, legal);
 
   section.appendChild(renderContainer({ children: [inner] }));
   root.appendChild(section);

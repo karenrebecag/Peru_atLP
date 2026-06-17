@@ -39,56 +39,67 @@
   .aa-landing .aa-marquee--masked { -webkit-mask-image: none; mask-image: none; }
 }
 
-/* ─── Sección speakers: header con padding lateral, marquee full-bleed ──────────── */
-.aa-landing .aa-speakers {
+/* ─── Sección Aliados: header + grid de cards centrado ──────────────────────────── */
+.aa-landing .aa-speakers__inner {
   display: flex;
   flex-direction: column;
   gap: var(--aa-gap-xl);
 }
-.aa-landing .aa-speakers > .aa-section-header {
-  padding-inline: var(--aa-container-pad);
+.aa-landing .aa-speakers__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--aa-gap-l);
 }
 
-/* ─── Speaker card ─────────────────────────────────────────────────────────────── */
+/* ─── Aliado card (estilo instructor: avatar + nombre/rol + bio) ─────────────────── */
 .aa-landing .aa-speaker-card {
-  width: 15em;
+  width: 26em;
+  max-width: 100%;
   flex: none;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  gap: var(--aa-gap-s);
+  padding: var(--aa-padding-m);
   border: 1px solid var(--aa-border);
   border-radius: var(--aa-radius-l);
   background: var(--aa-bg-subtle);
 }
 .aa-landing .aa-speaker-card__avatar {
-  aspect-ratio: 1;
-  margin: var(--aa-gap-xs) var(--aa-gap-xs) 0;
+  width: 4.5em;
+  height: 4.5em;
+  flex: none;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--aa-radius-pill);
   background: var(--aa-bg);
   color: var(--aa-fg-muted);
-  font-size: var(--aa-text-l);
+  font-size: var(--aa-text-m);
   font-weight: var(--aa-weight-extrabold);
 }
 .aa-landing .aa-speaker-card__meta {
   display: flex;
   flex-direction: column;
   gap: 0.15em;
-  padding: var(--aa-gap-xs);
 }
 .aa-landing .aa-speaker-card__name {
-  font-size: var(--aa-text-s);
+  font-size: var(--aa-text-m);
   font-weight: var(--aa-weight-extrabold);
   color: var(--aa-fg);
 }
 .aa-landing .aa-speaker-card__role {
-  font-size: var(--aa-text-xs);
+  font-size: var(--aa-text-s);
   color: var(--aa-fg);
 }
 .aa-landing .aa-speaker-card__company {
   font-size: var(--aa-text-xs);
   font-weight: var(--aa-weight-semibold);
+  color: var(--aa-accent);
+}
+.aa-landing .aa-speaker-card__bio {
+  margin-top: var(--aa-gap-xs);
+  font-size: var(--aa-text-s);
+  line-height: var(--aa-leading-normal);
   color: var(--aa-fg-muted);
 }

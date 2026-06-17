@@ -11,9 +11,10 @@ export function renderFormSection(root: Element): void {
   const mount = document.createElement('div');
   mount.setAttribute('data-atfx-form-mount', 'lead');
   mount.setAttribute('data-lang', 'es');
+  mount.setAttribute('data-theme', 'dark'); // atfx-forms aplica su tema dark
 
   const section = renderSection({
-    theme: 'light',
+    theme: 'dark',
     className: 'aa-form-section',
     children: [renderContainer({ size: 'sm', children: [mount] })],
   });

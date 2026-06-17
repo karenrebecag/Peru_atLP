@@ -19,31 +19,69 @@
 }
 .aa-landing .aa-section-header__sub { max-width: 40em; }
 
-/* ─── 5 · Qué aprenderás ───────────────────────────────────────────────────────── */
+/* ─── 5 · Qué aprenderás (lista numerada con directional-hover) ─────────────────── */
 .aa-landing .aa-learn__inner {
   display: flex;
   flex-direction: column;
   gap: var(--aa-gap-xl);
 }
-.aa-landing .aa-learn__item {
+.aa-landing .aa-learn__list { position: relative; }
+
+.aa-landing .aa-learn__row {
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: var(--aa-gap-s);
+  align-items: center;
+  gap: var(--aa-gap-m);
   padding: var(--aa-padding-s);
-  border: 1px solid var(--aa-border);
-  border-radius: var(--aa-radius-l);
-  background: var(--aa-bg-subtle);
+  overflow: hidden;
+}
+/* Tile que entra desde la dirección del cursor (wash cian) */
+.aa-landing .aa-learn__tile {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: var(--aa-radius-m);
+  background: color-mix(in srgb, var(--aa-accent) 10%, transparent);
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+/* Separadores */
+.aa-landing .aa-learn__border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--aa-border);
+  z-index: 2;
+}
+.aa-landing .aa-learn__border-bottom {
+  width: 100%;
+  height: 1px;
+  background: var(--aa-border);
 }
 .aa-landing .aa-learn__num {
+  position: relative;
+  z-index: 1;
   flex: none;
-  font-size: var(--aa-text-m);
+  min-width: 2.2em;
+  font-size: var(--aa-text-l);
   font-weight: var(--aa-weight-extrabold);
   line-height: 1;
-  color: var(--aa-fg);
+  color: var(--aa-accent);
+  opacity: 0.5;
+  font-variant-numeric: tabular-nums;
+  transition: opacity var(--aa-duration-s);
 }
-.aa-landing .aa-learn__text {
-  font-size: var(--aa-text-s);
-  line-height: var(--aa-leading-normal);
+.aa-landing .aa-learn__row:hover .aa-learn__num { opacity: 1; }
+.aa-landing .aa-learn__topic {
+  position: relative;
+  z-index: 1;
+  font-size: var(--aa-text-m);
+  font-weight: var(--aa-weight-bold);
+  line-height: 1.3;
   color: var(--aa-fg);
 }
 

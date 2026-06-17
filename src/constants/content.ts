@@ -5,6 +5,7 @@ export interface SpeakerData {
   name: string;
   role: string;
   company: string;
+  bio?: string;
 }
 export interface BenefitData {
   title: string;
@@ -25,33 +26,39 @@ export interface SocialData {
   fill: boolean;
 }
 
-// 5 · Qué aprenderás (placeholder — reemplazar por los 8 puntos reales)
+// 5 · Qué aprenderás (8 puntos reales del brief)
 export const LEARN_POINTS: string[] = [
-  'Cómo funciona realmente el sistema bancario y qué hace con tu dinero',
-  'Por qué tus ahorros pierden valor frente a la inflación',
-  'Qué papel juegan los metales en una economía en crecimiento',
-  'Cómo identificar oportunidades antes que la mayoría',
-  'Principios básicos para invertir con criterio',
-  'Errores frecuentes al invertir y cómo evitarlos',
-  'Cómo diversificar y proteger tu capital',
-  'Primeros pasos para empezar hoy',
+  'Comparación entre el plazo fijo y la inflación',
+  'Cómo tus ingresos pierden valor con el tiempo',
+  'Pros y contras de dejar tu dinero en el banco',
+  'Qué hace el banco con tu dinero',
+  '¿Es rentable invertir directamente desde el banco?',
+  'Cómo trabaja un banco y cómo hacerlo por tu cuenta',
+  'Oportunidades de inversión y estrategias',
+  'Conoce nuestro fondo de inversión',
 ];
 
-// 6 · Speakers (placeholder — reemplazar por los ponentes reales)
+// 6 · Aliados / instructores (Blue Makers — datos reales del brief)
 export const SPEAKERS: SpeakerData[] = [
-  { name: 'Ponente 1', role: 'Especialista en inversión', company: 'ATFX' },
-  { name: 'Ponente 2', role: 'Analista de mercados', company: 'ATFX' },
-  { name: 'Ponente 3', role: 'Estratega financiero', company: 'ATFX' },
-  { name: 'Ponente 4', role: 'Educador financiero', company: 'ATFX' },
-  { name: 'Ponente 5', role: 'Trader senior', company: 'ATFX' },
-  { name: 'Ponente 6', role: 'Asesor de inversión', company: 'ATFX' },
+  {
+    name: 'Álvaro Matos',
+    role: 'CEO de Blue Makers',
+    company: 'Certificado Bloomberg',
+    bio: 'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico. Lidera un fondo de inversión basado en trading cuantitativo algorítmico, una academia de formación y programas de mentoría presencial.',
+  },
+  {
+    name: 'Josué Flores',
+    role: 'Fundador y CEO de Blue Makers · Co-CEO de SkillyFund',
+    company: 'Certificado Bloomberg 2026',
+    bio: 'Trader profesional con 6 años de experiencia, especializado en índices americanos. Analista fundamental y macroeconómico, ponente en eventos a nivel LATAM, con operativa diaria y sesiones presenciales semanales.',
+  },
 ];
 
-// 7 · Sobre el evento (datos reales del hero)
+// 7 · Sobre el evento (datos reales del brief)
 export const ABOUT_STATS: StatData[] = [
-  { value: '3 h', label: 'de contenido en vivo' },
-  { value: 'Presencial', label: 'en Lima, Perú' },
-  { value: 'Cupos', label: 'limitados' },
+  { value: 'Presencial', label: 'Cámara de Comercio de Lima' },
+  { value: '3 h', label: '14 de julio · 9:00–12:00' },
+  { value: '+5 años', label: 'Blue Makers en trading' },
 ];
 
 // 8 · Beneficios (placeholder)
@@ -76,13 +83,13 @@ export const PILLARS: PillarData[] = [
   { variant: 'gradient', tags: ['Acción'], title: 'Aplica', text: 'Sal con pasos concretos para empezar a invertir hoy.' },
 ];
 
-// 9 · FAQ (placeholder on-topic)
+// 9 · FAQ (presencial — sin preguntas de "webinar gratuito"/"me van a vender", por brief)
 export const FAQS: FaqItem[] = [
   { question: '¿Necesito experiencia previa en inversión?', answer: 'No. La masterclass está diseñada para que cualquier persona entienda los conceptos desde cero.' },
-  { question: '¿El evento es presencial?', answer: 'Sí. Es 100% presencial en Lima, Perú, el martes 14 de julio de 9:00 a.m. a 12:00 p.m.' },
-  { question: '¿Tiene costo?', answer: 'El registro es gratuito, pero los cupos son limitados.' },
-  { question: '¿Recibiré algún material?', answer: 'Sí, los asistentes reciben material de apoyo tras el evento.' },
-  { question: '¿Cómo confirmo mi lugar?', answer: 'Completa el formulario de registro en esta página. Recibirás la confirmación por correo.' },
+  { question: '¿El evento es presencial?', answer: 'Sí. Es 100% presencial en la Cámara de Comercio de Lima, el martes 14 de julio de 9:00 a.m. a 12:00 p.m.' },
+  { question: '¿Qué plataforma necesito para asistir?', answer: 'Ninguna: es un evento presencial. Al registrarte te enviamos por correo la ubicación y los detalles de acceso.' },
+  { question: '¿Recibiré algún material?', answer: 'Sí. Los asistentes reciben material de apoyo y merchandising exclusivo del evento.' },
+  { question: '¿Cómo confirmo mi lugar?', answer: 'Completa el formulario de registro en esta página. Recibirás la confirmación por correo. Los cupos son limitados.' },
 ];
 
 // 10 · Redes (placeholder hrefs — reemplazar por las cuentas reales de ATFX Perú)

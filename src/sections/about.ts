@@ -26,9 +26,9 @@ export function renderAboutSection(root: Element): void {
 
   const header = renderSectionHeader({
     eyebrow: 'Sobre el evento',
-    heading: 'Una masterclass para anticiparte',
-    sub: 'Tres horas para entender el mercado y salir con un plan claro.',
-    highlight: 'anticiparte',
+    heading: 'Respaldado por ATFX y Blue Makers',
+    sub: 'Una masterclass presencial en la Cámara de Comercio de Lima sobre el futuro de la inversión: inteligencia, datos y oportunidades en los mercados globales.',
+    highlight: 'Blue Makers',
   });
 
   // Marquee de imágenes: dos filas en direcciones opuestas, con máscara en los bordes.

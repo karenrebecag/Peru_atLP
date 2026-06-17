@@ -1,7 +1,7 @@
 {
-  "name": "academy-lp",
+  "name": "atfx-peru-lp",
   "version": "1.0.0",
-  "description": "Landing page versionada para ATOM Academy. Lógica + estilos servidos vía jsDelivr; Elementor solo aporta un punto de montaje.",
+  "description": "Landing page versionada del evento ATFX Perú 'El Futuro de la Inversión'. Lógica + estilos servidos vía jsDelivr; Elementor solo aporta un punto de montaje.",
   "type": "module",
   "private": true,
   "scripts": {

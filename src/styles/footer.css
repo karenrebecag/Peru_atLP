@@ -80,6 +80,15 @@
 }
 .aa-landing .aa-footer__social svg { width: 1.1em; height: 1.1em; }
 
+/* Co-brand: redes del aliado Blue Makers */
+.aa-landing .aa-footer__cobrand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-s);
+  padding-top: var(--aa-padding-m);
+  border-top: 1px solid var(--aa-border);
+}
+
 /* Disclaimer legal */
 .aa-landing .aa-footer__legal {
   padding-top: var(--aa-padding-m);

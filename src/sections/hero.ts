@@ -13,26 +13,47 @@ export function renderHero(root: Element): void {
   hero.setAttribute('data-aa-section-theme', 'dark'); // strip oscuro sobre el video
   hero.setAttribute('data-aa-nav-anchor', '');
   hero.setAttribute('data-aa-intro', ''); // sus hijos animan al montar (no al scroll)
+  // Parallax (Portfolio2026): la escena de fondo se mueve scrubbeada al scroll
+  hero.setAttribute('data-parallax', 'trigger');
+  hero.setAttribute('data-parallax-start', '10');
+  hero.setAttribute('data-parallax-end', '-10');
 
-  // Fondo: video loop muteado + overlay degradado (como el HeroStrip de Spark)
+  // Fondo: escena Spline (si hay export .splinecode) o video de fallback, + overlay.
   const bg = document.createElement('div');
   bg.className = 'aa-hero__bg';
 
-  const video = document.createElement('video');
-  video.className = 'aa-hero__video';
-  video.src = ASSETS.heroVideo;
-  video.muted = true;
-  video.loop = true;
-  video.autoplay = true;
-  video.playsInline = true;
-  video.setAttribute('muted', '');
-  video.setAttribute('playsinline', '');
-  video.setAttribute('preload', 'metadata');
-  video.setAttribute('aria-hidden', 'true');
+  let media: HTMLElement;
+  if (ASSETS.splineScene) {
+    media = document.createElement('spline-viewer');
+    media.className = 'aa-hero__spline';
+    media.setAttribute('url', ASSETS.splineScene);
+    media.setAttribute('loading-anim-type', 'none');
+    media.setAttribute('aria-hidden', 'true');
+  } else {
+    const video = document.createElement('video');
+    video.className = 'aa-hero__video';
+    video.src = ASSETS.heroVideo;
+    video.muted = true;
+    video.loop = true;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('preload', 'metadata');
+    video.setAttribute('aria-hidden', 'true');
+    media = video;
+  }
+
+  // Wrapper = target del parallax (GSAP mueve este; el scale/zoom va en el media interno
+  // para no pisar el transform del parallax).
+  const mediaWrap = document.createElement('div');
+  mediaWrap.className = 'aa-hero__media-wrap';
+  mediaWrap.setAttribute('data-parallax', 'target');
+  mediaWrap.appendChild(media);
 
   const overlay = document.createElement('div');
   overlay.className = 'aa-hero__overlay';
-  bg.append(video, overlay);
+  bg.append(mediaWrap, overlay);
 
   const grid = document.createElement('div');
   grid.className = 'aa-hero__grid';
@@ -44,10 +65,10 @@ export function renderHero(root: Element): void {
 
   left.appendChild(
     renderHeading({
-      size: 'xl',
+      size: 'xxl',
       tag: 'h1',
-      text: 'Antes del Boom de los Metales',
-      highlight: 'Boom de los Metales',
+      text: 'El Futuro de la Inversión',
+      split: true,
       className: 'aa-hero__title',
     }),
   );
@@ -56,7 +77,7 @@ export function renderHero(root: Element): void {
   sub.className = 'aa-hero__sub';
   sub.setAttribute('data-aa-fade', '');
   sub.textContent =
-    'Descubre cómo anticiparte a las oportunidades de inversión en un mercado en crecimiento.';
+    'Inteligencia, datos y oportunidades en los mercados globales.';
   left.appendChild(sub);
 
   // Detalles del evento (fecha/horario + modalidad/lugar)
@@ -70,7 +91,7 @@ export function renderHero(root: Element): void {
 
   const where = document.createElement('p');
   where.className = 'aa-hero__detail';
-  where.textContent = 'Evento presencial | Lima, Perú';
+  where.textContent = 'Presencial · Cámara de Comercio de Lima';
 
   details.append(when, where);
   left.appendChild(details);
