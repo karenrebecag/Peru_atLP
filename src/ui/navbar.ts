@@ -6,7 +6,7 @@
 import { renderButton } from './atoms/button';
 import { NAV_CTA } from '../constants/nav';
 
-const LOGOS = '/public/logos';
+const LOGOS = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
 
 function logo(name: string, darkSrc: string, whiteSrc: string, modifier: string): HTMLElement {
   const wrap = document.createElement('span');

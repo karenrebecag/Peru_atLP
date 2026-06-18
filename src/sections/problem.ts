@@ -9,7 +9,7 @@ import { renderPill } from '../ui/atoms/pill';
 // Fotos del abanico. BASE relativa para el preview local; en producción (jsDelivr/R2)
 // cambiar por la URL del CDN (igual que constants/masterclass). El índice mapea a la
 // posición del abanico: 1 = la de adelante (is--1, z-index mayor).
-const AUDIENCE_BASE = '/public/audience';
+const AUDIENCE_BASE = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
 const FAN_PHOTOS = [
   `${AUDIENCE_BASE}/persona_1.webp`,
   `${AUDIENCE_BASE}/persona_2.webp`,

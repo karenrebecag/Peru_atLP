@@ -4,8 +4,8 @@ const CDN = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
 
 export const ASSETS = {
   heroVideo: `${CDN}/lima-coastline-web.mp4`,
-  // Escena Spline (.splinecode, formato runtime). Vacío = fallback a heroVideo.
-  splineScene: '/public/spline/scene-clean.splinecode',
+  // Escena Spline (.splinecode, formato runtime, en R2). Vacío = fallback a heroVideo.
+  splineScene: `${CDN}/atperuscene-clean.splinecode`,
 };
 
 // Runtime de Spline vía CDN (no npm). Se inyecta solo si hay una <spline-viewer> montada.

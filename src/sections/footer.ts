@@ -10,7 +10,7 @@ import {
   FOOTER_LEGAL,
 } from '../constants/footer';
 
-const LOGOS = '/public/logos';
+const LOGOS = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
 
 function renderSocialLink({ label, href, icon, fill }: { label: string; href: string; icon: string; fill: boolean }): HTMLAnchorElement {
   const a = document.createElement('a');
