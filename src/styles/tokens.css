@@ -5,7 +5,10 @@
   --aa-size-unit: 16;
   --aa-size-container-ideal: 1440;
   --aa-size-container-min: 992px;
-  --aa-size-container-max: 1920px;
+  /* Tope del escalado fluido: la tipografía deja de crecer pasado el ancho "ideal"
+     (1440). Sin esto, en monitores grandes (≥1920) la base subía a ~21px y todo se veía
+     +33% más grande/pesado. */
+  --aa-size-container-max: 1440px;
   --aa-size-container: clamp(var(--aa-size-container-min), 100vw, var(--aa-size-container-max));
   --aa-size-font: calc(var(--aa-size-container) / (var(--aa-size-container-ideal) / var(--aa-size-unit)));
 
