@@ -8,7 +8,9 @@ import { renderPill } from '../ui/atoms/pill';
 import { renderCountdown } from '../ui/countdown';
 import { EVENT_DATE } from '../constants/event';
 
-const ATFX_LOADER = 'https://cdn.jsdelivr.net/gh/karenrebecag/at_forms@latest/loader.js';
+// Pin a v1.0.11: primera versión con el fix X-Requested-With/multipart que dispara la
+// acción de Salesforce. @latest podía servir un bundle cacheado pre-fix y el lead no entraba.
+const ATFX_LOADER = 'https://cdn.jsdelivr.net/gh/karenrebecag/at_forms@v1.0.11/loader.js';
 
 export function renderFormSection(root: Element): void {
   const section = document.createElement('section');
