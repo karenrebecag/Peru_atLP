@@ -11,6 +11,9 @@
   border-radius: 2.5em 2.5em 0 0; /* spec de Spark; sin token equivalente */
   overflow: hidden;
 }
+@media screen and (max-width: 767px) {
+  .aa-landing .aa-form-section { border-radius: 0; }
+}
 
 .aa-landing .aa-countdown-section__inner {
   display: flex;

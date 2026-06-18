@@ -21,15 +21,14 @@ export function renderFormSection(root: Element): void {
   const intro = document.createElement('div');
   intro.className = 'aa-form-section__intro';
 
+  // Pill + heading + lead SIN reveal de scroll (aparecen estáticos).
   const eyebrow = renderPill('Inscripción · 14 de julio');
-  eyebrow.setAttribute('data-aa-fade', '');
 
   const lead = renderParagraph({
     size: 'l',
     text: 'Cupos limitados para la masterclass presencial en la Cámara de Comercio de Lima. Déjanos tus datos y asegura tu lugar; te enviamos la confirmación por correo.',
     className: 'aa-text-balance',
   });
-  lead.setAttribute('data-aa-fade', '');
 
   // Countdown compacto, debajo del copy (da contexto de urgencia; sin label/note).
   const cd = renderCountdown(EVENT_DATE);
@@ -38,7 +37,7 @@ export function renderFormSection(root: Element): void {
 
   intro.append(
     eyebrow,
-    renderHeading({ size: 'l', tag: 'h2', text: 'Asegura tu lugar', split: true, className: 'aa-text-center' }),
+    renderHeading({ size: 'l', tag: 'h2', text: 'Asegura tu lugar', split: false, className: 'aa-text-center' }),
     lead,
     cd,
   );

@@ -159,7 +159,8 @@
 
 @media screen and (max-width: 767px) {
   :root {
-    --aa-size-container-ideal: 550;
+    /* ideal más alto = base de fuente más chica (escala mobile mucho más pequeña) */
+    --aa-size-container-ideal: 720;
     --aa-size-container-min: 480px;
     --aa-size-container-max: 767px;
     --aa-container-pad: var(--aa-padding-xs);
@@ -171,7 +172,7 @@
 
 @media screen and (max-width: 479px) {
   :root {
-    --aa-size-container-ideal: 390;
+    --aa-size-container-ideal: 500;
     --aa-size-container-min: 320px;
     --aa-size-container-max: 479px;
     --aa-padding-xxl: 3rem;
