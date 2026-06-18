@@ -1,105 +1,91 @@
-// Navbar — Scaling Hamburger Navigation: botón hamburguesa fijo top-right que escala
-// y se abre en un panel con el menú. Estructura + comportamiento (toggle/close/ESC)
-// portados del recurso; estilizado con tokens --aa-* (paleta ATFX).
+// Navbar simple — conjunto de logos (ATFX · separador · Blue Makers) a la izquierda y un
+// CTA a la derecha, en space-between. Fijo bajo el topbar, fondo transparente. Los logos
+// cambian de versión según el tema de la sección detrás: white sobre dark, dark sobre
+// light (initNavbar detecta la sección bajo la barra y setea data-nav-theme).
 
-import { renderNavCta } from './atoms/nav-cta';
-import { NAV_LINKS, NAV_CTA } from '../constants/nav';
+import { renderButton } from './atoms/button';
+import { NAV_CTA } from '../constants/nav';
+
+const LOGOS = '/public/logos';
+
+function logo(name: string, darkSrc: string, whiteSrc: string, modifier: string): HTMLElement {
+  const wrap = document.createElement('span');
+  wrap.className = `aa-nav__logo ${modifier}`;
+
+  const dark = document.createElement('img');
+  dark.className = 'aa-nav__logo-img aa-nav__logo-img--dark';
+  dark.src = darkSrc;
+  dark.alt = name;
+
+  const white = document.createElement('img');
+  white.className = 'aa-nav__logo-img aa-nav__logo-img--white';
+  white.src = whiteSrc;
+  white.alt = '';
+  white.setAttribute('aria-hidden', 'true');
+
+  wrap.append(dark, white);
+  return wrap;
+}
 
 export function renderNavbar(root: Element): void {
   const nav = document.createElement('nav');
-  nav.className = 'aa-hnav';
-  nav.setAttribute('data-aa-hnav-status', 'not-active');
-  nav.setAttribute('aria-label', 'Principal');
+  nav.className = 'aa-nav';
+  nav.setAttribute('aria-label', 'Marca');
+  nav.setAttribute('data-nav-theme', 'dark'); // el hero arranca dark
 
-  // Backdrop (click = cerrar)
-  const backdrop = document.createElement('div');
-  backdrop.className = 'aa-hnav__backdrop';
-  backdrop.setAttribute('data-aa-hnav-toggle', 'close');
+  const logos = document.createElement('div');
+  logos.className = 'aa-nav__logos';
 
-  const panel = document.createElement('div');
-  panel.className = 'aa-hnav__panel';
+  const sep = document.createElement('span');
+  sep.className = 'aa-nav__sep';
+  sep.setAttribute('aria-hidden', 'true');
 
-  const panelBg = document.createElement('div');
-  panelBg.className = 'aa-hnav__panel-bg';
+  logos.append(
+    logo('ATFX', `${LOGOS}/atfx-dark.png`, `${LOGOS}/atfx-white.png`, 'aa-nav__logo--atfx'),
+    sep,
+    logo('Blue Makers', `${LOGOS}/bluemakers-blue.png`, `${LOGOS}/bluemakers-white.png`, 'aa-nav__logo--bm'),
+  );
 
-  // Contenido del menú
-  const group = document.createElement('div');
-  group.className = 'aa-hnav__group';
+  const cta = document.createElement('div');
+  cta.className = 'aa-nav__cta';
+  cta.appendChild(renderButton({ href: NAV_CTA.href, label: NAV_CTA.label, variant: 'primary', size: 'sm' }));
 
-  const label = document.createElement('p');
-  label.className = 'aa-hnav__label';
-  label.textContent = 'Menú';
-
-  const ul = document.createElement('ul');
-  ul.className = 'aa-hnav__list';
-  NAV_LINKS.forEach((link) => {
-    const li = document.createElement('li');
-    li.className = 'aa-hnav__item';
-
-    const a = document.createElement('a');
-    a.className = 'aa-hnav__link';
-    a.href = link.href;
-
-    const text = document.createElement('p');
-    text.className = 'aa-hnav__text';
-    text.textContent = link.label;
-
-    const dot = document.createElement('div');
-    dot.className = 'aa-hnav__dot';
-
-    a.append(text, dot);
-    li.appendChild(a);
-    ul.appendChild(li);
-  });
-
-  const ctaWrap = document.createElement('div');
-  ctaWrap.className = 'aa-hnav__cta';
-  ctaWrap.appendChild(renderNavCta({ href: NAV_CTA.href, label: NAV_CTA.label }));
-
-  group.append(label, ul, ctaWrap);
-
-  // Toggle (hamburguesa)
-  const toggle = document.createElement('button');
-  toggle.type = 'button';
-  toggle.className = 'aa-hnav__toggle';
-  toggle.setAttribute('data-aa-hnav-toggle', 'toggle');
-  toggle.setAttribute('aria-label', 'Abrir menú');
-  toggle.setAttribute('aria-expanded', 'false');
-  const bar1 = document.createElement('div');
-  bar1.className = 'aa-hnav__bar';
-  const bar2 = document.createElement('div');
-  bar2.className = 'aa-hnav__bar';
-  toggle.append(bar1, bar2);
-
-  panel.append(panelBg, group, toggle);
-  nav.append(backdrop, panel);
+  nav.append(logos, cta);
   root.appendChild(nav);
 }
 
 export function initNavbar(root: Element): void {
-  const nav = root.querySelector<HTMLElement>('[data-aa-hnav-status]');
+  const nav = root.querySelector<HTMLElement>('.aa-nav');
   if (!nav) return;
+  const topbar = document.querySelector<HTMLElement>('[data-aa-topbar]');
 
-  const isActive = (): boolean => nav.getAttribute('data-aa-hnav-status') === 'active';
-  const setStatus = (active: boolean): void => {
-    nav.setAttribute('data-aa-hnav-status', active ? 'active' : 'not-active');
-    const toggle = nav.querySelector<HTMLElement>('[data-aa-hnav-toggle="toggle"]');
-    toggle?.setAttribute('aria-label', active ? 'Cerrar menú' : 'Abrir menú');
-    toggle?.setAttribute('aria-expanded', String(active));
+  let raf = 0;
+  let lastY = window.scrollY;
+
+  const update = (): void => {
+    raf = 0;
+
+    // Tema según la sección detrás. Probe bajo el topbar (referencia fija, no depende del
+    // transform del nav al ocultarse); los logos son pointer-events:none → el hit-test pasa.
+    const topbarBottom = topbar ? topbar.getBoundingClientRect().bottom : 0;
+    // Probe al centro: capta las cards centradas con tema propio (FAQ navy) además de
+    // los strips full-width. closest() sube hasta el ancestro con data-aa-section-theme.
+    const el = document.elementFromPoint(window.innerWidth / 2, topbarBottom + 18);
+    const section = el?.closest<HTMLElement>('[data-aa-section-theme]');
+    nav.setAttribute('data-nav-theme', section?.getAttribute('data-aa-section-theme') ?? 'light');
+
+    // Hide on scroll down (y no-top) · show en top y scroll up.
+    const y = window.scrollY;
+    if (y <= 4) nav.classList.remove('aa-nav--hidden');
+    else if (y > lastY + 2 && y > 80) nav.classList.add('aa-nav--hidden');
+    else if (y < lastY - 2) nav.classList.remove('aa-nav--hidden');
+    lastY = y;
+  };
+  const onScroll = (): void => {
+    if (!raf) raf = requestAnimationFrame(update);
   };
 
-  nav.querySelectorAll<HTMLElement>('[data-aa-hnav-toggle="toggle"]').forEach((btn) => {
-    btn.addEventListener('click', () => setStatus(!isActive()));
-  });
-  nav.querySelectorAll<HTMLElement>('[data-aa-hnav-toggle="close"]').forEach((btn) => {
-    btn.addEventListener('click', () => setStatus(false));
-  });
-  // Cerrar al navegar a una sección
-  nav.querySelectorAll<HTMLAnchorElement>('.aa-hnav__link').forEach((a) => {
-    a.addEventListener('click', () => setStatus(false));
-  });
-  // ESC para cerrar
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isActive()) setStatus(false);
-  });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  requestAnimationFrame(update);
 }

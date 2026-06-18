@@ -10,9 +10,24 @@
   display: flex;
   align-items: center;
 }
+/* Conjunto de logos (mismos tamaños que el navbar) */
+.aa-landing .aa-footer__logos {
+  display: flex;
+  align-items: center;
+  gap: var(--aa-gap-m);
+}
 .aa-landing .aa-footer__logo {
-  height: 2.25em;
+  display: block;
   width: auto;
+}
+.aa-landing .aa-footer__logo--atfx { height: 1.2em; }
+.aa-landing .aa-footer__logo--bm { height: 2em; }
+/* Separador vertical (footer dark → línea clara, como el navbar en dark) */
+.aa-landing .aa-footer__logo-sep {
+  width: 1px;
+  height: 1.9em;
+  flex: none;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 /* Columnas: Legal / Sobre Nosotros / Redes */
@@ -80,13 +95,14 @@
 }
 .aa-landing .aa-footer__social svg { width: 1.1em; height: 1.1em; }
 
-/* Co-brand: redes del aliado Blue Makers */
-.aa-landing .aa-footer__cobrand {
+/* Redes: ATFX y Blue Makers apilados con jerarquía equivalente (colab) */
+.aa-landing .aa-footer__col--socials {
+  gap: var(--aa-gap-l);
+}
+.aa-landing .aa-footer__social-group {
   display: flex;
   flex-direction: column;
-  gap: var(--aa-gap-s);
-  padding-top: var(--aa-padding-m);
-  border-top: 1px solid var(--aa-border);
+  gap: var(--aa-gap-m);
 }
 
 /* Disclaimer legal */

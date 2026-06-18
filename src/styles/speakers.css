@@ -39,17 +39,99 @@
   .aa-landing .aa-marquee--masked { -webkit-mask-image: none; mask-image: none; }
 }
 
-/* ─── Sección Aliados: header + grid de cards centrado ──────────────────────────── */
-.aa-landing .aa-speakers__inner {
+/* ─── Sección Aliados: tres strips portadas de ATOM ─────────────────────────────── */
+.aa-landing .aa-allies {
   display: flex;
   flex-direction: column;
-  gap: var(--aa-gap-xl);
+  gap: var(--aa-gap-xxl);
 }
-.aa-landing .aa-speakers__grid {
+
+/* Strip 1 · intro centrado (patrón "La tesis") */
+.aa-landing .aa-allies-intro {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--aa-gap-m);
+  max-width: 48rem;
+  margin-inline: auto;
+}
+
+/* Strips 2-3 · dos columnas texto + media (patrón "El problema" / "La visión") */
+.aa-landing .aa-ally {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--aa-gap-xl);
+  align-items: center;
+}
+.aa-landing .aa-ally--media-left .aa-ally__media { order: -1; }
+.aa-landing .aa-ally__text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--aa-gap-m);
+}
+.aa-landing .aa-ally__role {
+  font-size: var(--aa-text-s);
+  font-weight: var(--aa-weight-semibold);
+  color: var(--aa-accent);
+}
+
+/* Lista con dots de acento (mismo patrón que el strip Problema) */
+.aa-landing .aa-ally__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-s);
+}
+.aa-landing .aa-ally__list li {
+  position: relative;
+  padding-left: 1.25em;
+  font-size: var(--aa-text-s);
+  line-height: var(--aa-leading-normal);
+  color: var(--aa-fg-muted);
+}
+.aa-landing .aa-ally__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 0.4em;
+  height: 0.4em;
+  border-radius: var(--aa-radius-pill);
+  background: var(--aa-accent);
+}
+
+/* Media placeholder (dashed) hasta tener las fotos reales */
+.aa-landing .aa-ally__media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: clamp(16px, 2vw, 28px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: var(--aa-gap-l);
+  background: color-mix(in srgb, var(--aa-fg) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--aa-fg) 25%, transparent);
+}
+.aa-landing .aa-ally__media-label {
+  font-family: var(--aa-font-mono);
+  font-size: var(--aa-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aa-fg-subtle);
+}
+
+@media screen and (max-width: 767px) {
+  .aa-landing .aa-ally {
+    grid-template-columns: 1fr;
+    gap: var(--aa-gap-l);
+  }
+  .aa-landing .aa-ally--media-left .aa-ally__media { order: 0; }
+  .aa-landing .aa-ally__media { aspect-ratio: 4 / 3; }
 }
 
 /* ─── Aliado card (estilo instructor: avatar + nombre/rol + bio) ─────────────────── */

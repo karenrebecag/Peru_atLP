@@ -62,7 +62,7 @@
 }
 .aa-landing .aa-pcard--dark { background: var(--aa-navy-800); color: #ffffff; }
 .aa-landing .aa-pcard--light { background: #ffffff; color: var(--aa-navy-900); }
-.aa-landing .aa-pcard--gradient { background: var(--aa-gradient-accent); color: #fff; }
+.aa-landing .aa-pcard--gradient { background: var(--aa-blue-700); color: #fff; }
 
 .aa-landing .aa-pcard__tags {
   display: flex;

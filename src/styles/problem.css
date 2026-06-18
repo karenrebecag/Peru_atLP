@@ -1,49 +1,147 @@
-/* atfx-peru · sección Problema (hook financiero). Layout del AudienceStrip de Spark:
-   contenido alineado a la izquierda + lista con dots de acento. Tokens --aa-* de OSMO. */
+/* atfx-peru · sección "Para quién" (público objetivo) — layout community-meet de OSMO
+   portado de ATOM. Intro centrado + fila de 2 columnas: checklist de criterios (izq) y
+   abanico de 3 placeholders (der) con momentum-hover. Tokens --aa-* de OSMO. */
 
-.aa-landing .aa-problem__content {
+.aa-landing .aa-aud {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Intro centrado */
+.aa-landing .aa-aud__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--aa-gap-s);
+  max-width: 60em;
+  margin-inline: auto;
+  margin-bottom: var(--aa-gap-xxl);
+  text-align: center;
+}
+
+/* Fila de 2 columnas */
+.aa-landing .aa-aud__row {
+  display: flex;
+  gap: var(--aa-gap-l);
+  align-items: flex-start;
+  width: 100%;
+  max-width: 64em;
+  margin-inline: auto;
+}
+.aa-landing .aa-aud__col {
+  flex: 1;
+  position: relative;
+}
+
+/* Columna izquierda: lead + lista */
+.aa-landing .aa-aud__info {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--aa-gap-m);
-  text-align: left;
+  max-width: 28em;
 }
-.aa-landing .aa-problem__content > p { max-width: 44em; }
-
-.aa-landing .aa-problem__group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--aa-gap-s);
-}
-.aa-landing .aa-problem__lead {
+.aa-landing .aa-aud__lead {
   font-size: var(--aa-text-s);
-  font-weight: var(--aa-weight-semibold);
-  color: var(--aa-fg);
-}
-
-/* Lista con dots de acento (patrón del AudienceStrip: dot 0.4em a la izquierda) */
-.aa-landing .aa-problem__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--aa-gap-s);
-}
-.aa-landing .aa-problem__list li {
-  position: relative;
-  padding-left: 1.25em;
-  font-size: var(--aa-text-s);
-  line-height: var(--aa-leading-normal);
+  line-height: 1.5;
   color: var(--aa-fg-muted);
 }
-.aa-landing .aa-problem__list li::before {
-  content: '';
+.aa-landing .aa-aud__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.aa-landing .aa-aud__item {
+  display: flex;
+  gap: var(--aa-gap-s);
+  align-items: flex-start;
+  padding-block: var(--aa-gap-s);
+  border-top: 1px solid var(--aa-border);
+}
+.aa-landing .aa-aud__item:first-child { border-top: 0; }
+.aa-landing .aa-aud__item-icon {
+  flex: none;
+  width: 1.15em;
+  margin-top: 0.15em;
+  color: var(--aa-accent);
+}
+.aa-landing .aa-aud__item-icon svg { width: 100%; height: auto; display: block; }
+.aa-landing .aa-aud__item-text {
+  font-size: var(--aa-text-s);
+  line-height: 1.4;
+}
+
+/* Columna derecha: abanico. Contenedor con altura reservada (cards en absoluto). */
+.aa-landing .aa-aud__img-w {
+  position: relative;
+  width: 100%;
+  max-width: 28em;
+  min-height: 28em;
+}
+.aa-landing .aa-aud__img {
   position: absolute;
+  top: 0;
   left: 0;
-  top: 0.6em;
-  width: 0.4em;
-  height: 0.4em;
-  border-radius: var(--aa-radius-pill);
-  background: var(--aa-accent);
+  width: min(17em, 62%);
+  aspect-ratio: 1 / 1.15;
+}
+.aa-landing .aa-aud__media {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.7em;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(3, 7, 18, 0.25);
+}
+.aa-landing .aa-aud__media-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Placeholder (dashed) hasta tener las fotos reales */
+.aa-landing .aa-aud__media--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--aa-fg) 8%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--aa-fg) 25%, transparent);
+  box-shadow: none;
+}
+.aa-landing .aa-aud__media-label {
+  font-family: var(--aa-font-mono);
+  font-size: var(--aa-text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--aa-fg-subtle);
+}
+.aa-landing .aa-aud__img.is--1 { z-index: 3; transform: rotate(-4deg); }
+.aa-landing .aa-aud__img.is--2 { z-index: 2; transform: translate(44%, 7%) rotate(3deg); }
+.aa-landing .aa-aud__img.is--3 { z-index: 1; transform: translate(82%, 15%) rotate(8deg); }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 991px) {
+  .aa-landing .aa-aud__row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--aa-gap-xxl);
+  }
+  .aa-landing .aa-aud__info {
+    max-width: 34em;
+    align-items: center;
+    text-align: center;
+  }
+  .aa-landing .aa-aud__item { text-align: left; }
+  .aa-landing .aa-aud__col--media { width: 100%; display: flex; justify-content: center; }
+  .aa-landing .aa-aud__img-w { min-height: 24em; max-width: 26em; }
+  .aa-landing .aa-aud__img { width: min(15em, 58%); }
+}
+
+@media screen and (max-width: 767px) {
+  .aa-landing .aa-aud__img-w { min-height: 21em; }
+  .aa-landing .aa-aud__img.is--2 { transform: translate(30%, 7%) rotate(3deg); }
+  .aa-landing .aa-aud__img.is--3 { transform: translate(56%, 14%) rotate(7deg); }
 }

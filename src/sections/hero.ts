@@ -3,7 +3,8 @@
 // Tokens --aa-* (OSMO).
 
 import { renderHeading } from '../ui/text';
-import { renderNavCta } from '../ui/atoms/nav-cta';
+import { renderButton } from '../ui/atoms/button';
+import { renderPill } from '../ui/atoms/pill';
 import { ASSETS } from '../constants/assets';
 
 export function renderHero(root: Element): void {
@@ -63,6 +64,11 @@ export function renderHero(root: Element): void {
   left.className = 'aa-hero__left';
   left.setAttribute('data-hero-left', '');
 
+  const tag = renderPill('Masterclass presencial');
+  tag.classList.add('aa-hero__tag');
+  tag.setAttribute('data-aa-fade', '');
+  left.appendChild(tag);
+
   left.appendChild(
     renderHeading({
       size: 'xxl',
@@ -99,7 +105,7 @@ export function renderHero(root: Element): void {
   const cta = document.createElement('div');
   cta.className = 'aa-hero__cta';
   cta.setAttribute('data-aa-fade', '');
-  cta.appendChild(renderNavCta({ href: '#registro', label: 'Regístrate', standalone: true }));
+  cta.appendChild(renderButton({ href: '#registro', label: 'Regístrate', variant: 'primary' }));
   left.appendChild(cta);
 
   grid.appendChild(left);

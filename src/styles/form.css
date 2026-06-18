@@ -152,3 +152,83 @@
   .aa-landing .aa-check__icon,
   .aa-landing .aa-error { transition: none !important; }
 }
+
+/* ─── Form section — bloque de registro: countdown + card del widget atfx-forms ──── */
+/* Strip en navy PROFUNDO (blue-990); la card flota en el primary #172b4f (sutil, oscuro)
+   y deja un escalón de profundidad. Separada del countdown por padding-l. */
+.aa-landing .aa-form-section .aa-container--card {
+  background: #0d1a32;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+/* Countdown compacto, debajo del copy (contexto de urgencia, no protagonista). Cajas
+   chicas en navy profundo (recesadas sobre la card #172b4f); números medianos. */
+.aa-landing .aa-form-section__countdown {
+  margin-top: var(--aa-gap-s);
+  gap: var(--aa-gap-xs);
+}
+.aa-landing .aa-form-section .aa-countdown__unit {
+  min-width: 3.4em;
+  padding: var(--aa-gap-xs) var(--aa-gap-s);
+  gap: 2px;
+  background: var(--aa-blue-990);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.aa-landing .aa-form-section .aa-countdown__num { font-size: var(--aa-text-m); }
+.aa-landing .aa-form-section .aa-countdown__label { font-size: 0.62em; }
+.aa-landing .aa-form-section__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--aa-gap-xl);
+}
+.aa-landing .aa-form-section__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--aa-gap-s);
+  max-width: 44em;
+  margin-inline: auto;
+}
+
+/* ─── Override del widget atfx-forms (externo, inyectado por jsDelivr) ─────────────── */
+/* Inputs planos al estilo de la página en lugar del efecto cristal (blur + glass inset +
+   bg translúcido). Mapea las vars --atfx-* a los tokens --aa-* del strip dark; mayor
+   especificidad que las reglas .atfx-* del widget. El acento (#22d3ee) ya coincide. */
+.aa-landing .aa-form-section .atfx-form {
+  --atfx-font:        var(--aa-font); /* explícito (el default 'inherit' ya da Inter Tight) */
+  --atfx-bg:          var(--aa-input-bg);
+  --atfx-text:        var(--aa-fg);
+  --atfx-label:       var(--aa-fg-muted);
+  --atfx-placeholder: var(--aa-fg-subtle);
+  --atfx-border:      var(--aa-border);
+  --atfx-radius:      var(--aa-input-radius);
+  --atfx-glass-inset: none;          /* mata el realce de cristal (base y focus) */
+  --atfx-panel-bg:    var(--aa-bg-subtle);
+}
+/* Labels al estilo OSMO de la página (.aa-label): mono, uppercase, tracking — en vez
+   del sans sentence-case semibold del widget. */
+.aa-landing .aa-form-section .atfx-form .atfx-label {
+  font-family: var(--aa-font-mono);
+  font-size: var(--aa-text-xxs);
+  font-weight: var(--aa-weight-regular);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+/* Placeholders al mismo tratamiento que los labels (mono + uppercase + tracking).
+   Solo el estado vacío: los valores escritos/seleccionados se quedan en sans. */
+.aa-landing .aa-form-section .atfx-form .atfx-input::placeholder,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-search::placeholder,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-trigger[data-placeholder] .atfx-combobox-value {
+  font-family: var(--aa-font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+/* bg translúcido (color-mix) + backdrop-filter están hardcodeados: se anulan aquí. */
+.aa-landing .aa-form-section .atfx-form .atfx-input,
+.aa-landing .aa-form-section .atfx-form .atfx-select,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-trigger,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-search {
+  background: var(--aa-input-bg);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}

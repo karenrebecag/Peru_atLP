@@ -85,56 +85,110 @@
   color: var(--aa-fg);
 }
 
-/* ─── 7 · Sobre el evento (marquee de imágenes + stats) ────────────────────────── */
-.aa-landing .aa-about {
+/* ─── 7 · Sobre el evento — drift gallery (efecto MWG 094) ──────────────────────── */
+/* Sección pinneada: texto centrado fijo + tira horizontal de fotos que deriva. */
+.aa-landing .aa-drift {
+  position: relative;
+  overflow: hidden;
+  /* Aire arriba/abajo: bandas claras que separan el gallery de las secciones vecinas
+     (se scrollean antes de que el container llegue a top:top y se pinee). */
+  padding-block: var(--aa-padding-xxl);
+}
+.aa-landing .aa-drift__container {
   display: flex;
   flex-direction: column;
-  gap: var(--aa-gap-xl);
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
 }
-.aa-landing .aa-about__photos {
-  display: flex;
-  flex-direction: column;
-  gap: var(--aa-gap-xs);
-}
-/* Tile de foto (Masterclass) */
-.aa-landing .aa-photo {
-  width: 16em;
-  aspect-ratio: 1;
-  flex: none;
-  display: block;
-  object-fit: cover;
-  border-radius: var(--aa-radius-l);
-  background: var(--aa-bg-subtle); /* fallback mientras carga */
-}
-.aa-landing .aa-stat {
+
+/* Texto centrado (por encima de las fotos para que siempre se lea) */
+.aa-landing .aa-drift__text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--aa-gap-xxs);
+  gap: var(--aa-gap-l);
+  width: 100%;
+  max-width: 40em;
+  padding-inline: var(--aa-container-pad);
   text-align: center;
+  pointer-events: none; /* no bloquea el scroll del pin */
 }
-.aa-landing .aa-stat__value {
-  font-size: var(--aa-text-l);
-  font-weight: var(--aa-weight-extrabold);
-  line-height: 1;
-  color: var(--aa-fg);
-}
-.aa-landing .aa-stat__label {
-  font-size: var(--aa-text-xs);
+.aa-landing .aa-drift__sub {
+  max-width: 32em;
   color: var(--aa-fg-muted);
 }
 
-/* ─── 8 · Beneficios (PillarSlider) ────────────────────────────────────────────── */
-/* El slider aporta el espacio inferior (arco de rotación); la sección no duplica. */
-.aa-landing .aa-benefits { padding-bottom: 0; }
+/* Tira horizontal de fotos (GSAP la traslada en X durante el pin) */
+.aa-landing .aa-drift__cards {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 1.6vw;
+  padding: 0 55vw; /* la tira arranca/termina fuera de pantalla (texto solo) */
+  will-change: transform;
+}
+.aa-landing .aa-drift__card {
+  flex: none;
+  width: 9vw;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 0.5vw;
+  will-change: transform;
+}
 
-/* ─── 9 · FAQ ──────────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .aa-landing .aa-drift__card { width: 24vw; }
+  .aa-landing .aa-drift__cards { padding: 0 60vw; }
+}
+
+/* ─── 8 · Beneficios (efecto MWG 087) → estilos en benefits.css ─────────────────── */
+
+/* ─── 9 · FAQ — card flotante navy (patrón "Primera generación" de ATOM) ────────── */
+/* El strip queda claro; el container flota como card oscuro navy con texto claro.
+   Remapea los tokens dentro de la card → badges, accordion y CTA se adaptan solos. */
+.aa-landing .aa-faq .aa-container--card {
+  --aa-bg:        var(--aa-navy-900);
+  --aa-bg-subtle: var(--aa-navy-850);
+  --aa-fg:        #ffffff;
+  --aa-fg-muted:  rgba(255, 255, 255, 0.65);
+  --aa-fg-subtle: rgba(255, 255, 255, 0.35);
+  --aa-border:    rgba(255, 255, 255, 0.12);
+  background: var(--aa-navy-900);
+  color: var(--aa-fg);
+}
 .aa-landing .aa-faq__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--aa-gap-l);
+  align-items: flex-start;
+  gap: var(--aa-gap-m);
 }
+/* Pills (badge + "Preguntas frecuentes") quedan compactos a la izquierda */
+.aa-landing .aa-faq__inner > .aa-pill { align-self: flex-start; }
+.aa-landing .aa-faq__intro { max-width: 52ch; }
+/* Mapa de la sede: ancho completo de la card, enmarcado y redondeado */
+.aa-landing .aa-faq__map {
+  width: 100%;
+  margin-top: var(--aa-gap-s);
+  border-radius: var(--aa-radius-l);
+  overflow: hidden;
+  border: 1px solid var(--aa-border);
+}
+.aa-landing .aa-faq__map iframe {
+  display: block;
+  width: 100%;
+  height: clamp(280px, 38vh, 440px);
+  border: 0;
+}
+.aa-landing .aa-faq__label { margin-top: var(--aa-gap-s); }
+.aa-landing .aa-faq .aa-accordion { width: 100%; }
 .aa-landing .aa-faq__cta {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-top: var(--aa-gap-s);
 }

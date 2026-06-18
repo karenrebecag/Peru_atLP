@@ -7,8 +7,8 @@ export interface NavLink {
 }
 
 export const NAV_LINKS: NavLink[] = [
-  { label: 'El evento', href: '#programa' },
-  { label: 'Registro', href: '#registro' },
+  { label: 'Por qué asistir', href: '#beneficios' },
+  { label: 'Para quién', href: '#problema' },
   { label: 'Speakers', href: '#speakers' },
   { label: 'FAQ', href: '#faq' },
 ];

@@ -68,15 +68,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--aa-gap-m);
+  gap: var(--aa-gap-s);
   text-align: center;
   text-shadow: 0 2px 28px rgba(0, 0, 0, 0.6); /* legibilidad sobre la escena Spline */
 }
 
-.aa-landing .aa-hero__title { max-width: 12em; }
+/* Tag: separación clara del título (el badge abre la jerarquía) */
+.aa-landing .aa-hero__tag { margin-bottom: var(--aa-gap-xs); }
+
+.aa-landing .aa-hero__title {
+  max-width: 14em;
+  margin-bottom: var(--aa-gap-xxs); /* respiro entre título y sub */
+}
 
 .aa-landing .aa-hero__sub {
-  max-width: 28em;
+  max-width: 30em;
   font-size: var(--aa-text-m);
   line-height: var(--aa-leading-snug);
   color: var(--aa-fg-muted);
@@ -87,7 +93,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--aa-gap-xxs);
-  font-size: var(--aa-text-xs);
+  margin-top: var(--aa-gap-xs);
+  font-size: var(--aa-text-s);
 }
 .aa-landing .aa-hero__detail { color: var(--aa-fg-muted); }
 .aa-landing .aa-hero__detail--strong {
@@ -96,7 +103,7 @@
 }
 
 .aa-landing .aa-hero__cta {
-  margin-top: var(--aa-gap-xs);
+  margin-top: var(--aa-gap-m);
   width: auto;
 }
 @media screen and (max-width: 991px) {

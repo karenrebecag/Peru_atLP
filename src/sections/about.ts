@@ -1,66 +1,59 @@
-// 7 · Sobre el evento — header + marquee de imágenes (dual-row, Edition2025Strip) +
-// grid de stats. Tiles placeholder (gradiente) hasta tener fotos reales.
+// 7 · Sobre el evento — efecto MWG 094 (drift gallery): sección pinneada con el texto
+// (label + heading + sub) centrado fijo, mientras una tira de fotos de la masterclass
+// deriva alrededor del centro al scrollear. Strip dark profundo. Init en drift-gallery.ts.
 
-import { renderContainer, renderGrid } from '../ui/layout';
-import { renderSectionHeader } from '../ui/section-header';
-import { renderMarquee } from '../ui/marquee';
-import { ABOUT_STATS } from '../constants/content';
+import { renderHeading, renderParagraph } from '../ui/text';
+import { renderPill } from '../ui/atoms/pill';
 import { MASTERCLASS_PHOTOS } from '../constants/masterclass';
 
-function renderPhotoTile(src: string, i: number): HTMLElement {
-  const img = document.createElement('img');
-  img.className = 'aa-photo';
-  img.src = src;
-  img.alt = `Masterclass — foto ${i + 1}`;
-  img.loading = 'lazy';
-  img.decoding = 'async';
-  return img;
-}
+// Subconjunto: ~12 fotos para que el recorrido pinneado no sea excesivo.
+const PHOTOS = MASTERCLASS_PHOTOS.slice(0, 12);
 
 export function renderAboutSection(root: Element): void {
   const section = document.createElement('section');
-  section.className = 'aa-section aa-about';
+  section.className = 'aa-drift';
   section.id = 'evento';
   section.setAttribute('data-aa-section-theme', 'light');
   section.setAttribute('data-aa-nav-anchor', '');
 
-  const header = renderSectionHeader({
-    eyebrow: 'Sobre el evento',
-    heading: 'Respaldado por ATFX y Blue Makers',
-    sub: 'Una masterclass presencial en la Cámara de Comercio de Lima sobre el futuro de la inversión: inteligencia, datos y oportunidades en los mercados globales.',
+  const container = document.createElement('div');
+  container.className = 'aa-drift__container';
+
+  // Texto centrado (queda fijo en el centro mientras las fotos derivan alrededor)
+  const text = document.createElement('div');
+  text.className = 'aa-drift__text';
+
+  const pill = renderPill('Sobre el evento');
+
+  const heading = renderHeading({
+    size: 'l',
+    tag: 'h2',
+    text: 'Respaldado por ATFX y Blue Makers',
     highlight: 'Blue Makers',
   });
 
-  // Marquee de imágenes: dos filas en direcciones opuestas, con máscara en los bordes.
-  const half = Math.ceil(MASTERCLASS_PHOTOS.length / 2);
-  const tilesA = MASTERCLASS_PHOTOS.slice(0, half).map((src, i) => renderPhotoTile(src, i));
-  const tilesB = MASTERCLASS_PHOTOS.slice(half).map((src, i) => renderPhotoTile(src, i + half));
-  const photos = document.createElement('div');
-  photos.className = 'aa-about__photos';
-  photos.append(
-    renderMarquee({ items: tilesA, direction: 'forward', duration: '55s', gap: 'var(--aa-gap-xs)', className: 'aa-marquee--masked' }),
-    renderMarquee({ items: tilesB, direction: 'reverse', duration: '55s', gap: 'var(--aa-gap-xs)', className: 'aa-marquee--masked' }),
-  );
-
-  const stats = ABOUT_STATS.map(({ value, label }) => {
-    const stat = document.createElement('div');
-    stat.className = 'aa-stat';
-    const v = document.createElement('span');
-    v.className = 'aa-stat__value';
-    v.textContent = value;
-    const l = document.createElement('span');
-    l.className = 'aa-stat__label';
-    l.textContent = label;
-    stat.append(v, l);
-    return stat;
+  const sub = renderParagraph({
+    size: 'l',
+    text: 'Una masterclass presencial en la Cámara de Comercio de Lima sobre el futuro de la inversión.',
+    className: 'aa-drift__sub',
   });
-  const statsGrid = renderGrid({ cols: 3, className: 'aa-about__stats', attrs: { 'data-aa-fade': '' }, children: stats });
 
-  // Header y stats en container; el marquee de fotos full-bleed.
-  section.append(
-    renderContainer({ size: 'm', children: [header] }),
-    photos,
-    renderContainer({ size: 'm', children: [statsGrid] }),
-  );
+  text.append(pill, heading, sub);
+
+  // Tira horizontal de fotos
+  const cards = document.createElement('div');
+  cards.className = 'aa-drift__cards';
+  PHOTOS.forEach((src, i) => {
+    const img = document.createElement('img');
+    img.className = 'aa-drift__card';
+    img.src = src;
+    img.alt = `Masterclass — foto ${i + 1}`;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    cards.appendChild(img);
+  });
+
+  container.append(text, cards);
+  section.appendChild(container);
   root.appendChild(section);
 }

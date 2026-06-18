@@ -42,6 +42,32 @@ Widget **HTML** con el mount + loader:
 
 Atributos: `data-aa-theme` (`light|dark`, default `light`) · `data-aa-lang` (`es|en`, default `es`).
 
+### Gotcha: plugins de "delay JS" de WordPress (WP Meteor, WP Rocket, Perfmatters…)
+
+La landing se renderiza 100% con JS: si el loader no corre al cargar, la página queda
+en blanco. Los plugins de optimización de WordPress **retrasan la ejecución de todo el JS
+hasta la primera interacción** (scroll/touch/click). Reescriben el `<script>` del loader a
+`type="javascript/blocked"` y mueven la URL a `data-wpmeteor-src` → en mobile no pinta hasta
+que el usuario hace scroll (parece loader eterno).
+
+`data-cfasync="false"` **NO** exime de esto (eso es solo para Cloudflare Rocket Loader). Hay
+que eximir el loader del plugin de delay. Para **WP Meteor** basta el atributo:
+
+```html
+<script data-cfasync="false" data-wpmeteor-nooptimize="true"
+  src="https://cdn.jsdelivr.net/gh/<owner>/<repo>@latest/loader.js"></script>
+```
+
+Para otros plugins (WP Rocket, Perfmatters, Flying Scripts), excluir la URL del loader
+(`jsdelivr`/`loader.js`) en su lista de "no retrasar / exclude from delay".
+
+Los scripts que el loader inyecta luego (`landing.js`) se crean vía JS, así que el plugin no
+los toca; solo hay que eximir el `<script>` del loader.
+
+> Cache: jsDelivr sirve el loader `@latest` con `max-age` de 7 días en el navegador. Tras
+> cambiar el embed o publicar versión, probar con hard-refresh o incógnito para no quedarse
+> con el loader viejo cacheado.
+
 ## Arquitectura
 
 ```

@@ -1,19 +1,15 @@
 /* atfx-peru · countdown section. Replica el ProgramaWrapper de Spark: overlap sobre
    el hero + esquinas superiores redondeadas + theming light. Tokens --aa-* de OSMO. */
 
-.aa-landing .aa-countdown-section {
+/* Bloque de registro (countdown + form) — overlap sobre el hero + esquinas redondeadas.
+   Usa el dark profundo por defecto (bg blue-990); sin override que lo aclare. */
+.aa-landing .aa-form-section {
   position: relative;
   z-index: 1;
   margin-top: calc(-1 * var(--aa-padding-l)); /* overlap sobre el hero (Spark -mt-16 ≈ 4rem) */
   padding-block: var(--aa-padding-xl);
   border-radius: 2.5em 2.5em 0 0; /* spec de Spark; sin token equivalente */
   overflow: hidden;
-}
-/* Dark "obsidian azulado" (navy profundo) — countdown + form */
-.aa-landing .aa-countdown-section[data-aa-section-theme="dark"],
-.aa-landing .aa-form-section[data-aa-section-theme="dark"] {
-  --aa-bg: var(--aa-navy-950);
-  --aa-bg-subtle: var(--aa-navy-900);
 }
 
 .aa-landing .aa-countdown-section__inner {
@@ -71,8 +67,6 @@
   color: var(--aa-fg-muted);
 }
 
-/* El form continúa el bloque de registro: sin padding-top (el countdown ya aporta
-   el espacio inferior; evita acumular doble padding entre secciones). */
-.aa-landing .aa-form-section { padding-top: 0; overflow-x: clip; }
 /* El form embebido (atfx-forms, CSS externo) no debe empujar el ancho */
+.aa-landing .aa-form-section { overflow-x: clip; }
 .aa-landing .aa-form-section [data-atfx-form-mount] { max-width: 100%; }

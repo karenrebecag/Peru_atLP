@@ -24,40 +24,42 @@
   --aa-neutral-900: #171717;
   --aa-neutral-950: #0a0a0a;
 
-  /* ─── Color — brand accents ───────────────────────────────────────────────── */
-  --aa-color-electric: #a1ff62;
-  --aa-color-purple:   #6840ff;
-  --aa-color-coral:    #f84131;
-  --aa-color-sky:      #22d3ee;
+  /* ─── Blue Zodiac — paleta ÚNICA de marca (primary = 950 #172b4f) ──────────── */
+  --aa-blue-50:  #eff8ff;
+  --aa-blue-100: #dceefd;
+  --aa-blue-200: #c0e3fd;
+  --aa-blue-300: #95d2fb;
+  --aa-blue-400: #63b8f7;
+  --aa-blue-500: #3e9af3;
+  --aa-blue-600: #297de7;
+  --aa-blue-700: #2067d5;
+  --aa-blue-800: #2153ac;
+  --aa-blue-900: #204888;
+  --aa-blue-950: #172b4f; /* PRIMARY de marca */
+  /* Sombras profundas de la misma familia — para FONDOS de dark sections (el primary
+     #172b4f queda para cards/superficies elevadas, no para el strip). */
+  --aa-blue-975: #101e37;
+  --aa-blue-990: #0a1426;
 
-  /* ─── Paleta de marca ATFX ─────────────────────────────────────────────────── */
-  --aa-color-cyan:   #22d3ee; /* acento de firma */
-  --aa-color-blue:   #2fb0ff;
-  --aa-color-aqua:   #74f6f6;
-  --aa-color-indigo: #1b3fc0;
-  --aa-navy-950: #030712; /* navy profundo */
-  --aa-navy-900: #08101d; /* base oscura */
-  --aa-navy-850: #0d1e35; /* panel/input */
-  --aa-navy-800: #111b30; /* superficie elevada */
+  /* Estado de error — color funcional, fuera de la paleta de marca */
+  --aa-color-coral: #f84131;
 
-  /* Gradiente de acento (highlights de texto/cards) — azul de marca ATFX */
-  --aa-gradient-accent: linear-gradient(135deg, var(--aa-color-blue) 0%, var(--aa-color-aqua) 50%, var(--aa-color-indigo) 100%);
+  /* Aliases legacy → repuntan a la escala azul (no rompen referencias navy/cyan) */
+  --aa-navy-950: var(--aa-blue-950);
+  --aa-navy-900: var(--aa-blue-950);
+  --aa-navy-850: var(--aa-blue-900);
+  --aa-navy-800: var(--aa-blue-900);
+  --aa-color-cyan: var(--aa-blue-500);
 
-  /* Gradiente del CTA (borde-gradiente + cara tintada) — botón de marca ATFX */
-  --aa-gradient-cta:
-    linear-gradient(135deg, rgba(4, 151, 243, 0.25), rgba(15, 44, 82, 0.9)),
-    linear-gradient(135deg, var(--aa-color-blue) 0%, var(--aa-color-aqua) 50%, var(--aa-color-indigo) 100%);
-
-  /* ─── Semantic color tokens ───────────────────────────────────────────────── */
-  /* Semánticos light (default) — paleta ATFX */
-  --aa-bg:        #f7f8fa;
+  /* ─── Semantic color tokens — light (default) ─────────────────────────────── */
+  --aa-bg:        var(--aa-blue-50);
   --aa-bg-subtle: #ffffff;
-  --aa-fg:        var(--aa-navy-900);
-  --aa-fg-muted:  rgba(8, 16, 29, 0.65);
-  --aa-fg-subtle: rgba(8, 16, 29, 0.40);
-  --aa-border:    rgba(8, 16, 29, 0.08);
-  --aa-accent:    var(--aa-color-cyan);
-  --aa-accent-fg: var(--aa-navy-900);
+  --aa-fg:        var(--aa-blue-950);
+  --aa-fg-muted:  rgba(23, 43, 79, 0.65);
+  --aa-fg-subtle: rgba(23, 43, 79, 0.40);
+  --aa-border:    rgba(23, 43, 79, 0.12);
+  --aa-accent:    var(--aa-blue-600);
+  --aa-accent-fg: #ffffff;
 
   /* ─── Spacing — section level (grande) ────────────────────────────────────── */
   --aa-padding-xxl: 8rem;
@@ -99,8 +101,9 @@
   --aa-stagger: 0.05s;
 
   /* ─── Typography ──────────────────────────────────────────────────────────── */
-  --aa-font:      inherit;
-  --aa-font-mono: ui-monospace, 'Cascadia Code', monospace;
+  --aa-font:         'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --aa-font-display: 'Grift', 'Inter Tight', Georgia, serif;
+  --aa-font-mono:    'Interval', ui-monospace, 'Cascadia Code', monospace;
 
   --aa-text-xxl: clamp(3rem,    5vw,   5.5rem);
   --aa-text-xl:  clamp(2.25rem, 4vw,   4rem);
@@ -108,8 +111,8 @@
   --aa-text-ml:  clamp(1.5rem,  2.5vw, 2.25rem);
   --aa-text-m:   clamp(1.25rem, 2vw,   1.75rem);
   --aa-text-s:   clamp(1rem,    1.5vw, 1.25rem);
-  --aa-text-xs:  clamp(0.9rem,  1.1vw,  1rem);
-  --aa-text-xxs: clamp(0.8rem,  0.95vw, 0.875rem);
+  --aa-text-xs:  0.875rem;
+  --aa-text-xxs: 0.75rem;
 
   --aa-leading-tight:  1.1;
   --aa-leading-snug:   1.25;
@@ -128,6 +131,7 @@
 
   /* ─── Layout heights ──────────────────────────────────────────────────────── */
   --aa-nav-height: 4.625em; /* spacer superior del hero (alto de navbar OSMO) */
+  --aa-topbar-height: 2.25em; /* barra fija superior (botón de registro permanente) */
 
   /* ─── Form (estilo input de OSMO) ─────────────────────────────────────────── */
   --aa-input-height: 3em;

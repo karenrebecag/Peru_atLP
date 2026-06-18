@@ -9,7 +9,7 @@
 // Valores canónicos de OSMO: words yPercent 100 + rotate 10 (transformOrigin bottom left),
 // reveal duration 1.2 / ease expo.out / stagger 0.05; scroll start "clamp(top 80%)" once.
 
-import { gsap, SplitText, STAGGER } from './gsap-env';
+import { gsap, ScrollTrigger, SplitText, STAGGER } from './gsap-env';
 import { initButtonRotate } from './button-rotate';
 
 // Timeline de entrada de OSMO: duration 1.2, ease expo.out (distinto del default 0.6/osmo).
@@ -101,4 +101,12 @@ export function initMotion(root: Element): void {
   initButtonRotate(root);
   playIntro(root);
   initScrollReveals(root);
+
+  // Los reveals se crean en el boot, antes de que carguen fuentes e imágenes: con alturas
+  // colapsadas los triggers above-the-fold quedan mal posicionados y el contenido no se
+  // revela hasta hacer scroll. Recalculamos al asentarse el layout.
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  ScrollTrigger.refresh();
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
 }

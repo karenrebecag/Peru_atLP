@@ -1,60 +1,79 @@
-// Accordion — trasladado del Accordion de Spark: panel con animación grid-rows
-// (0fr↔1fr) + chevron que rota. closeSiblings (solo uno abierto). Estado vía
-// data-open; init engancha el toggle.
+// Accordion (FAQ) — técnica de OSMO: el body es un grid que anima grid-template-rows
+// 0fr → 1fr (el inner con overflow:hidden). Toggle con un atributo data-open. Single-open.
+// Maquetación portada de ATOM Academy: filas underline (sin caja de fondo) para que no se
+// estiren como pills a lo ancho de la card.
 
 import type { FaqItem } from '../constants/content';
 
 export function renderAccordion(items: FaqItem[]): HTMLElement {
-  const ul = document.createElement('ul');
-  ul.className = 'aa-accordion';
+  const acc = document.createElement('div');
+  acc.className = 'aa-accordion';
 
-  items.forEach((item) => {
-    const li = document.createElement('li');
-    li.className = 'aa-accordion__item';
-    li.setAttribute('data-open', 'false');
+  items.forEach((it, i) => {
+    const item = document.createElement('div');
+    item.className = 'aa-accordion__item';
+    item.setAttribute('data-aa-accordion-item', '');
 
-    const trigger = document.createElement('button');
-    trigger.type = 'button';
-    trigger.className = 'aa-accordion__trigger';
+    const head = document.createElement('button');
+    head.type = 'button';
+    head.className = 'aa-accordion__head';
+    head.setAttribute('data-aa-accordion-toggle', '');
+    head.setAttribute('aria-expanded', 'false');
 
     const q = document.createElement('h3');
     q.className = 'aa-accordion__q';
-    q.textContent = item.question;
+    q.textContent = it.question;
 
     const icon = document.createElement('span');
     icon.className = 'aa-accordion__icon';
-    icon.innerHTML =
-      '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M28.5 22.5L18 12L7.5 22.5" stroke="currentColor" stroke-width="3" stroke-miterlimit="10"/></svg>';
+    icon.setAttribute('aria-hidden', 'true');
 
-    trigger.append(q, icon);
+    head.append(q, icon);
 
-    const panel = document.createElement('div');
-    panel.className = 'aa-accordion__panel';
-    const panelInner = document.createElement('div');
-    panelInner.className = 'aa-accordion__panel-inner';
+    const body = document.createElement('div');
+    body.className = 'aa-accordion__body';
+    body.id = `aa-faq-${i}`;
+    head.setAttribute('aria-controls', body.id);
+
+    const inner = document.createElement('div');
+    inner.className = 'aa-accordion__inner';
     const a = document.createElement('p');
     a.className = 'aa-accordion__a';
-    a.textContent = item.answer;
-    panelInner.appendChild(a);
-    panel.appendChild(panelInner);
+    a.textContent = it.answer;
+    inner.appendChild(a);
+    body.appendChild(inner);
 
-    li.append(trigger, panel);
-    ul.appendChild(li);
+    item.append(head, body);
+    acc.appendChild(item);
   });
 
-  return ul;
+  return acc;
 }
 
 export function initAccordion(scope: Element): void {
-  scope.querySelectorAll<HTMLElement>('.aa-accordion').forEach((acc) => {
-    const items = Array.from(acc.querySelectorAll<HTMLElement>('.aa-accordion__item'));
-    items.forEach((item) => {
-      const trigger = item.querySelector<HTMLButtonElement>('.aa-accordion__trigger');
-      trigger?.addEventListener('click', () => {
-        const willOpen = item.getAttribute('data-open') !== 'true';
-        items.forEach((i) => i.setAttribute('data-open', 'false')); // closeSiblings
-        item.setAttribute('data-open', String(willOpen));
-      });
+  scope.querySelectorAll<HTMLButtonElement>('[data-aa-accordion-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('[data-aa-accordion-item]');
+      if (!item) return;
+      const isOpen = item.hasAttribute('data-open');
+
+      // single-open: cerrar los demás del mismo accordion
+      item.parentElement
+        ?.querySelectorAll('[data-aa-accordion-item][data-open]')
+        .forEach((other) => {
+          if (other !== item) {
+            other.removeAttribute('data-open');
+            other.querySelector('[data-aa-accordion-toggle]')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+      if (isOpen) {
+        item.removeAttribute('data-open');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 }

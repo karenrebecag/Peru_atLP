@@ -1,5 +1,4 @@
-/* atfx-peru · navbar + atoms (roll, pill, nav-cta). Maquetación trasladada del Navbar
-   de SparkSummit (logo · pill de links con indicador · CTA), con tokens --aa-* de OSMO. */
+/* atfx-peru · navbar (logos ATFX · Blue Makers + CTA) + atoms (roll, pill, nav-cta). */
 
 /* ─── Roll (label vertical: dos copias apiladas, suben en hover) ───────────────── */
 .aa-landing .aa-roll {
@@ -24,21 +23,24 @@
 }
 
 /* ─── Pill (eyebrow contenedor) ────────────────────────────────────────────────── */
+/* Tag/eyebrow — badge sólido de alto contraste (patrón .aa-eyebrow de ATOM). Flipea
+   con el tema: en light = navy sobre claro; en dark = blanco sobre navy. Interval mono. */
 .aa-landing .aa-pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.4em 1em;
-  font-size: var(--aa-text-xxs);
-  font-weight: var(--aa-weight-bold);
-  letter-spacing: 0.12em;
+  width: fit-content;
+  padding: 0.5em 1em;
+  font-family: var(--aa-font-mono);
+  font-size: var(--aa-text-xs);
+  font-weight: var(--aa-weight-semibold);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--aa-fg);
-  background: var(--aa-bg-subtle);
-  border: 1px solid var(--aa-border);
+  color: var(--aa-bg);
+  background: var(--aa-fg);
   border-radius: var(--aa-radius-pill);
 }
 
-/* ─── NavCta (botón pill con roll + flecha) — gradiente azul de marca ATFX ──────── */
+/* ─── NavCta (botón pill con roll + flecha) — usado en otros átomos ─────────────── */
 .aa-landing .aa-nav-cta {
   position: relative;
   display: inline-flex;
@@ -46,14 +48,11 @@
   gap: 0.5em;
   height: 2.8em;
   padding: 0 1.4em;
-  color: #ffffff;
+  color: var(--aa-accent-fg);
   border: 1px solid transparent;
   border-radius: var(--aa-radius-pill);
-  /* Doble gradiente: cara tintada (padding-box) + borde-gradiente (border-box) */
-  background-image: var(--aa-gradient-cta);
-  background-origin: border-box;
-  background-clip: padding-box, border-box;
-  box-shadow: 0 8px 24px -6px rgba(47, 176, 255, 0.35), inset 0 0 20px rgba(47, 176, 255, 0.1);
+  background: var(--aa-accent);
+  box-shadow: 0 8px 24px -6px rgba(23, 43, 79, 0.35);
   font-weight: var(--aa-weight-bold);
   font-size: var(--aa-text-xs);
   line-height: 1;
@@ -67,7 +66,7 @@
 }
 .aa-landing .aa-nav-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 32px -6px rgba(47, 176, 255, 0.45), inset 0 0 24px rgba(47, 176, 255, 0.15);
+  box-shadow: 0 12px 32px -6px rgba(23, 43, 79, 0.45);
 }
 .aa-landing .aa-nav-cta:hover .aa-roll__item { transform: translateY(-100%); }
 
@@ -77,9 +76,6 @@
   padding-right: 0.5em;
   width: auto;
   justify-content: center;
-}
-@media screen and (max-width: 991px) {
-  .aa-landing .aa-nav-cta--standalone { width: 100%; }
 }
 .aa-landing .aa-nav-cta__icon {
   display: flex;
@@ -94,168 +90,70 @@
 }
 .aa-landing .aa-nav-cta__icon svg { width: 1em; height: 1em; color: var(--aa-color-blue); }
 
-/* ─── Scaling Hamburger Navigation ─────────────────────────────────────────────── */
-/* Easing firma del componente: cubic-bezier(0.5,0.5,0,1). Colores → paleta ATFX. */
-.aa-landing .aa-hnav {
-  z-index: 500;
-  pointer-events: none;
+/* ─── Navbar — logos (ATFX · sep · Blue Makers) + CTA, en space-between ─────────── */
+/* Fija bajo el topbar, fondo transparente. La barra no captura clicks (solo logos/CTA);
+   data-nav-theme lo setea initNavbar según la sección detrás → swap de versión de logo. */
+.aa-landing .aa-nav {
   position: fixed;
-  inset: 0;
-  font-size: 1rem;
-}
-
-/* Backdrop oscuro */
-.aa-landing .aa-hnav__backdrop {
-  transition: opacity 0.7s cubic-bezier(0.5, 0.5, 0, 1), visibility 0.7s cubic-bezier(0.5, 0.5, 0, 1);
-  opacity: 0;
-  pointer-events: auto;
-  visibility: hidden;
-  background-color: #000;
-  position: absolute;
-  inset: 0;
-}
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__backdrop {
-  opacity: 0.33;
-  visibility: visible;
-}
-
-/* Panel (top-right) */
-.aa-landing .aa-hnav__panel {
-  border-radius: 1.5em;
-  position: absolute;
-  top: 2em;
-  right: 2em;
-}
-.aa-landing .aa-hnav__panel-bg {
-  transition: all 0.7s cubic-bezier(0.5, 0.5, 0, 1);
-  background-color: #f7f8fa;
-  border: 1px solid rgba(8, 16, 29, 0.08);
-  border-radius: 1.75em;
-  width: 3.5em;
-  height: 3.5em;
-  position: absolute;
-  top: 0;
+  top: var(--aa-topbar-height);
+  left: 0;
   right: 0;
-  box-shadow: 0 10px 30px -10px rgba(8, 16, 29, 0.35);
-}
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__panel-bg {
-  width: 100%;
-  height: 100%;
-}
-
-/* Contenido del menú (escala al abrir) */
-.aa-landing .aa-hnav__group {
-  transition: opacity 0.5s cubic-bezier(0.5, 0.5, 0, 1), transform 0.7s cubic-bezier(0.5, 0.5, 0, 1), visibility 0.7s;
-  gap: 1em;
-  pointer-events: auto;
-  transform-origin: 100% 0;
-  flex-flow: column;
-  padding: 2.25em 2.5em 2em 2em;
+  z-index: 120;
   display: flex;
-  position: relative;
-  transform: scale(0.15) rotate(0.001deg);
-  opacity: 0;
-  visibility: hidden;
-}
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__group {
-  transform: scale(1) rotate(0.001deg);
-  opacity: 1;
-  visibility: visible;
-}
-
-.aa-landing .aa-hnav__label {
-  opacity: 0.5;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0;
-  font-family: var(--aa-font-mono);
-  font-size: 1em;
-  font-weight: 400;
-  color: var(--aa-navy-900);
-}
-
-.aa-landing .aa-hnav__list {
-  gap: 0.375em;
-  flex-flow: column;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  position: relative;
-  list-style: none;
-}
-.aa-landing .aa-hnav__item { margin: 0; padding: 0; list-style: none; }
-
-.aa-landing .aa-hnav__link {
-  color: var(--aa-navy-900);
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  text-decoration: none;
+  gap: var(--aa-gap-m);
+  padding: var(--aa-gap-s) var(--aa-container-pad);
+  pointer-events: none;
+  transition:
+    transform var(--aa-duration-m) var(--aa-ease-out),
+    opacity var(--aa-duration-s) var(--aa-ease-out);
+}
+/* Oculto: sube fuera de vista (scroll down / !top). Vuelve en top y scroll up. */
+.aa-landing .aa-nav--hidden {
+  transform: translateY(calc(-100% - var(--aa-topbar-height)));
+  opacity: 0;
+}
+.aa-landing .aa-nav__logos {
   display: flex;
+  align-items: center;
+  gap: var(--aa-gap-m);
+  pointer-events: none; /* decorativos: dejan pasar el hit-test al detectar el tema */
 }
-.aa-landing .aa-hnav__text {
-  white-space: nowrap;
-  margin: 0;
-  padding-right: 1.25em;
-  font-size: 2em;
-  font-weight: var(--aa-weight-bold);
-  letter-spacing: -0.01em;
+.aa-landing .aa-nav__logo {
+  display: inline-flex;
+  align-items: center;
 }
-.aa-landing .aa-hnav__dot {
-  transition: transform 0.7s cubic-bezier(0.5, 0.5, 0, 1), opacity 0.7s cubic-bezier(0.5, 0.5, 0, 1);
-  background-color: var(--aa-color-cyan);
-  border-radius: 50%;
-  flex-shrink: 0;
-  width: 0.5em;
-  height: 0.5em;
-  transform: scale(0) rotate(0.001deg);
-  opacity: 0.5;
+.aa-landing .aa-nav__logo-img {
+  display: block;
+  width: auto;
 }
-.aa-landing .aa-hnav__panel:has(.aa-hnav__link:hover) .aa-hnav__dot {
-  transform: scale(0) rotate(0.001deg);
-}
-.aa-landing .aa-hnav__link:hover .aa-hnav__dot {
-  transform: scale(1) rotate(0.001deg);
-  opacity: 1;
-}
+.aa-landing .aa-nav__logo--atfx .aa-nav__logo-img { height: 1.2em; }
+.aa-landing .aa-nav__logo--bm .aa-nav__logo-img { height: 2em; }
 
-/* CTA dentro del panel */
-.aa-landing .aa-hnav__cta { margin-top: 0.5em; }
+/* Swap por tema: dark logos sobre secciones light; white logos sobre dark */
+.aa-landing .aa-nav__logo-img--dark { display: block; }
+.aa-landing .aa-nav__logo-img--white { display: none; }
+.aa-landing .aa-nav[data-nav-theme="dark"] .aa-nav__logo-img--dark { display: none; }
+.aa-landing .aa-nav[data-nav-theme="dark"] .aa-nav__logo-img--white { display: block; }
 
-/* Toggle (hamburguesa → X) */
-.aa-landing .aa-hnav__toggle {
-  transition: transform 0.7s cubic-bezier(0.5, 0.5, 0, 1);
+/* Separador vertical (color por tema) */
+.aa-landing .aa-nav__sep {
+  width: 1px;
+  height: 1.9em;
+  flex: none;
+  background: rgba(23, 43, 79, 0.25);
+}
+.aa-landing .aa-nav[data-nav-theme="dark"] .aa-nav__sep { background: rgba(255, 255, 255, 0.3); }
+
+.aa-landing .aa-nav__cta {
   pointer-events: auto;
-  cursor: pointer;
-  border: none;
-  background: none;
-  padding: 0;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  width: 3.5em;
-  height: 3.5em;
-  display: flex;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(0, 0) rotate(0.001deg);
+  flex: none;
 }
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__toggle {
-  transform: translate(-1em, 1em) rotate(0.001deg);
+
+@media screen and (max-width: 600px) {
+  .aa-landing .aa-nav { padding-block: var(--aa-gap-xs); }
+  .aa-landing .aa-nav__logos { gap: var(--aa-gap-s); }
+  .aa-landing .aa-nav__logo--atfx .aa-nav__logo-img { height: 1em; }
+  .aa-landing .aa-nav__logo--bm .aa-nav__logo-img { height: 1.7em; }
 }
-.aa-landing .aa-hnav__bar {
-  transition: transform 0.7s cubic-bezier(0.5, 0.5, 0, 1);
-  background-color: var(--aa-navy-900);
-  width: 40%;
-  height: 0.125em;
-  position: absolute;
-  transform: translateY(-0.15em) rotate(0.001deg);
-}
-.aa-landing .aa-hnav__toggle:hover .aa-hnav__bar { transform: translateY(0.15em) rotate(0.001deg); }
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__toggle .aa-hnav__bar { transform: translateY(0) rotate(45deg); }
-.aa-landing .aa-hnav__toggle .aa-hnav__bar:nth-child(2) {
-  transition: transform 0.7s cubic-bezier(0.5, 0.5, 0, 1);
-  transform: translateY(0.15em) rotate(0.001deg);
-}
-.aa-landing .aa-hnav__toggle:hover .aa-hnav__bar:nth-child(2) { transform: translateY(-0.15em) rotate(0.001deg); }
-.aa-landing [data-aa-hnav-status="active"] .aa-hnav__toggle .aa-hnav__bar:nth-child(2) { transform: translateY(0) rotate(-45deg); }
