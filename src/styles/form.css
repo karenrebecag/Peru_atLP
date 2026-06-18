@@ -232,3 +232,22 @@
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
+
+/* Texto ESCRITO en los inputs: blanco. Sobre la card oscura salía negro porque un
+   reset/autofill fija -webkit-text-fill-color (gana sobre `color`). Se fuerza explícito.
+   Solo el valor real (no el placeholder del combobox, que se queda sutil). */
+.aa-landing .aa-form-section .atfx-form .atfx-input,
+.aa-landing .aa-form-section .atfx-form .atfx-select,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-search,
+.aa-landing .aa-form-section .atfx-form textarea,
+.aa-landing .aa-form-section .atfx-form .atfx-combobox-trigger:not([data-placeholder]) .atfx-combobox-value {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+}
+/* Autofill del navegador: mantiene texto blanco y evita el bg amarillo. */
+.aa-landing .aa-form-section .atfx-form .atfx-input:-webkit-autofill,
+.aa-landing .aa-form-section .atfx-form .atfx-input:-webkit-autofill:hover,
+.aa-landing .aa-form-section .atfx-form .atfx-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 9999s ease-in-out 0s;
+}

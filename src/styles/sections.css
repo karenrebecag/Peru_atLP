@@ -114,7 +114,7 @@
   align-items: center;
   gap: var(--aa-gap-l);
   width: 100%;
-  max-width: 40em;
+  max-width: 48em;
   padding-inline: var(--aa-container-pad);
   text-align: center;
   pointer-events: none; /* no bloquea el scroll del pin */
