@@ -3,7 +3,7 @@
 const CDN = 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev';
 
 export const ASSETS = {
-  heroVideo: `${CDN}/CleanShot%202026-06-18%20at%2016.12.12.mp4`,
+  heroVideo: `${CDN}/stock-market-exchange-and-forex-candles-chart-back-2026-01-28-03-22-46-utc.mp4`,
   // Vacío = el hero usa el <video> bg (loop muted) en vez de la escena Spline.
   splineScene: '',
 };
