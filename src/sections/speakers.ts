@@ -19,6 +19,23 @@ function mediaPlaceholder(label: string): HTMLElement {
   return media;
 }
 
+function mediaPhoto(url: string, alt: string): HTMLElement {
+  const media = document.createElement('div');
+  media.className = 'aa-ally__media';
+  const img = document.createElement('img');
+  img.className = 'aa-ally__img';
+  img.src = url;
+  img.alt = alt;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  media.appendChild(img);
+  return media;
+}
+
+function allyMedia(o: { photo?: string; name: string }): HTMLElement {
+  return o.photo ? mediaPhoto(o.photo, `Foto · ${o.name}`) : mediaPlaceholder(`Foto · ${o.name}`);
+}
+
 function roleLine(text: string): HTMLElement {
   const el = document.createElement('p');
   el.className = 'aa-ally__role';
@@ -32,6 +49,7 @@ interface AllyOpts {
   name: string;
   role: string;
   heading: string;
+  photo?: string;
 }
 
 // El problema → lista de dots
@@ -62,7 +80,7 @@ function buildAllyList(o: AllyOpts & { intro: string; list: string[] }): HTMLEle
     list,
   );
 
-  el.append(text, mediaPlaceholder(`Foto · ${o.name}`));
+  el.append(text, allyMedia(o));
   return el;
 }
 
@@ -84,7 +102,7 @@ function buildAllyProse(o: AllyOpts & { paragraphs: string[] }): HTMLElement {
     text.appendChild(par);
   });
 
-  el.append(text, mediaPlaceholder(`Foto · ${o.name}`));
+  el.append(text, allyMedia(o));
   return el;
 }
 
@@ -120,6 +138,7 @@ export function renderSpeakersSection(root: Element): void {
     side: 'left',
     name: 'Álvaro Matos',
     role: 'CEO de Blue Makers · Certificado Bloomberg',
+    photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/1_ff76c0d7bc1893d54ed31a9eb14cc1d9fe01136767b7ea840a67b051c3d4f6c4.webp',
     heading: 'Estrategia que opera todos los días',
     intro: 'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico.',
     list: [
@@ -135,6 +154,7 @@ export function renderSpeakersSection(root: Element): void {
     side: 'right',
     name: 'Josué Flores',
     role: 'Fundador y CEO de Blue Makers · Co-CEO de SkillyFund · Certificado Bloomberg 2026',
+    photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/2_a30968ec89264e5fd9d08f73e511db43ae3b990a2dc141e5080a1d761aec0a92.webp',
     heading: 'Seis años operando los mercados',
     paragraphs: [
       'Trader profesional con 6 años de experiencia, especializado en índices americanos. Analista fundamental y macroeconómico.',

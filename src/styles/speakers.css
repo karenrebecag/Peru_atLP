@@ -126,6 +126,17 @@
   letter-spacing: 0.08em;
   color: var(--aa-fg-subtle);
 }
+.aa-landing .aa-ally__media:has(.aa-ally__img) {
+  background: none;
+  border: none;
+}
+.aa-landing .aa-ally__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 @media screen and (max-width: 767px) {
   .aa-landing .aa-ally {
