@@ -13,6 +13,12 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
 - Plan de traslado de SparkSummit2026 documentado en `CLAUDE.md` (mapeo de tokens,
   secciones, componentes y fases).
 - Este `CHANGELOG.md`.
+- Fotos reales de los aliados en la sección Speakers: Álvaro Matos (columna izquierda) y
+  Josué Flores (strip inferior, columna derecha), reemplazando los placeholders.
+
+### Changed
+- Pin del loader de `at_forms` a `@v1.0.12` (incluye preselección de país/prefijo por geo-IP
+  y el fix de envío a Salesforce).
 
 ### Fixed
 - Desborde horizontal en todas las strips: se restauró el reset `box-sizing: border-box`
