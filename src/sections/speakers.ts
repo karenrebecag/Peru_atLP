@@ -137,7 +137,7 @@ export function renderSpeakersSection(root: Element): void {
   const alvaro = buildAllyList({
     side: 'left',
     name: 'Álvaro Matos',
-    role: 'CEO de Blue Makers · Certificado Bloomberg',
+    role: 'Fundador y CEO de Blue Makers. Cofundador de Skillyfund.',
     photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/%2Cn%CC%83mln.kb%2Cvjmchnfgxbdfzxncmg%2C_4e1baf77176b027c45966af329a62c44c5ceb9f6c7bf4712a4b97c9ae12fe6ce.webp',
     heading: 'Estrategia que opera todos los días',
     intro: 'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico.',
@@ -153,7 +153,7 @@ export function renderSpeakersSection(root: Element): void {
   const josue = buildAllyProse({
     side: 'right',
     name: 'Josué Flores',
-    role: 'Fundador y CEO de Blue Makers · Co-CEO de SkillyFund · Certificado Bloomberg 2026',
+    role: 'Fundador y CEO de Blue Makers. Cofundador de Skillyfund.',
     photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/1_ff76c0d7bc1893d54ed31a9eb14cc1d9fe01136767b7ea840a67b051c3d4f6c4.webp',
     heading: 'Seis años operando los mercados',
     paragraphs: [

@@ -36,24 +36,35 @@
   color: var(--aa-fg-muted);
 }
 
-/* Countdown: 4 unidades en cajas */
+/* Countdown: 4 unidades en cajas. Grid de columnas iguales (minmax(0,1fr)) para que
+   los 4 squares midan exactamente lo mismo sin depender del ancho del label. */
 .aa-landing .aa-countdown {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
   gap: var(--aa-gap-s);
+  width: 100%;
+  max-width: 30em;
+  margin-inline: auto;
 }
 .aa-landing .aa-countdown__unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--aa-gap-xxs);
-  min-width: 4.5em;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
   padding: var(--aa-padding-s) var(--aa-padding-xs);
   background: var(--aa-bg-subtle);
   border: 1px solid var(--aa-border);
   border-radius: var(--aa-radius-l);
+}
+@media screen and (max-width: 479px) {
+  .aa-landing .aa-countdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 18em;
+  }
 }
 .aa-landing .aa-countdown__num {
   font-size: var(--aa-text-l);

@@ -21,6 +21,10 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
   y el fix de envío a Salesforce).
 - Fotos de aliados corregidas (cruce de identidad) y media en proporción 1:1 (antes 3:4
   desktop / 4:3 mobile).
+- Rol unificado de Álvaro y Josué: "Fundador y CEO de Blue Makers. Cofundador de Skillyfund."
+- Fotos de aliados en proporción 4:5 (ligeramente vertical).
+- Countdown: squares en grid de columnas iguales (`minmax(0,1fr)`) con `aspect-ratio` 1:1,
+  para que los 4 midan lo mismo; 2 columnas en mobile.
 
 ### Fixed
 - Desborde horizontal en todas las strips: se restauró el reset `box-sizing: border-box`
