@@ -19,6 +19,8 @@ Versionado: el CI de release etiqueta `vX.Y.Z` por push a `main` (cuando se cone
 ### Changed
 - Pin del loader de `at_forms` a `@v1.0.12` (incluye preselección de país/prefijo por geo-IP
   y el fix de envío a Salesforce).
+- Fotos de aliados corregidas (cruce de identidad) y media en proporción 1:1 (antes 3:4
+  desktop / 4:3 mobile).
 
 ### Fixed
 - Desborde horizontal en todas las strips: se restauró el reset `box-sizing: border-box`

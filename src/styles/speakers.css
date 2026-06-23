@@ -110,7 +110,7 @@
 /* Media placeholder (dashed) hasta tener las fotos reales */
 .aa-landing .aa-ally__media {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1 / 1;
   border-radius: clamp(16px, 2vw, 28px);
   overflow: hidden;
   display: flex;
@@ -144,7 +144,7 @@
     gap: var(--aa-gap-l);
   }
   .aa-landing .aa-ally--media-left .aa-ally__media { order: 0; }
-  .aa-landing .aa-ally__media { aspect-ratio: 4 / 3; }
+  .aa-landing .aa-ally__media { aspect-ratio: 1 / 1; }
 }
 
 /* ─── Aliado card (estilo instructor: avatar + nombre/rol + bio) ─────────────────── */
