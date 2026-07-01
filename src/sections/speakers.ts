@@ -133,32 +133,34 @@ export function renderSpeakersSection(root: Element): void {
     }),
   );
 
-  // — Strip 2 · Álvaro Matos (El problema, media izquierda) —
-  const alvaro = buildAllyList({
+  // — Strip 2 · Álvaro Matos (prosa, media izquierda) —
+  const alvaro = buildAllyProse({
     side: 'left',
     name: 'Álvaro Matos',
-    role: 'Fundador y CEO de Blue Makers. Cofundador de Skillyfund.',
+    role: 'Co-CEO de Blue Makers. Cofundador de Skilly Fund.',
     photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/%2Cn%CC%83mln.kb%2Cvjmchnfgxbdfzxncmg%2C_4e1baf77176b027c45966af329a62c44c5ceb9f6c7bf4712a4b97c9ae12fe6ce.webp',
     heading: 'Estrategia que opera todos los días',
-    intro: 'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico.',
-    list: [
-      'Lidera un fondo de inversión de trading cuantitativo algorítmico',
-      'Dirige una academia de formación en trading',
-      'Programas de mentoría presencial',
-      'Análisis macroeconómico de mercados',
+    paragraphs: [
+      'Trader e inversionista con experiencia en mercados financieros, criptomonedas y análisis macroeconómico.',
+      'Está certificado en Análisis de Datos Financieros por Bloomberg y lidera un ecosistema que integra un fondo de inversión basado en trading cuantitativo algorítmico, una academia de formación para traders y programas de mentoría presencial.',
+      'Su enfoque combina macroeconomía, análisis de mercados y tecnología aplicada a las inversiones.',
     ],
   });
 
-  // — Strip 3 · Josué Flores (La visión, media derecha) —
-  const josue = buildAllyProse({
+  // — Strip 3 · Josué Flores (intro + viñetas, media derecha) —
+  const josue = buildAllyList({
     side: 'right',
     name: 'Josué Flores',
-    role: 'Fundador y CEO de Blue Makers. Cofundador de Skillyfund.',
+    role: 'Fundador y CEO de Blue Makers. Cofundador de Skilly Fund.',
     photo: 'https://pub-62c41549a44642efbcd3f775bdb039b3.r2.dev/1_ff76c0d7bc1893d54ed31a9eb14cc1d9fe01136767b7ea840a67b051c3d4f6c4.webp',
     heading: 'Seis años operando los mercados',
-    paragraphs: [
-      'Trader profesional con 6 años de experiencia, especializado en índices americanos. Analista fundamental y macroeconómico.',
-      'Ponente en eventos a nivel LATAM, con operativa diaria y sesiones presenciales semanales.',
+    intro:
+      '6 años operando en los mercados financieros. Trader e inversionista con experiencia en mercados financieros, análisis macroeconómico y cuantitativo.',
+    list: [
+      'Certificado en Análisis de Datos Financieros por Bloomberg',
+      'Lidera un fondo de inversión de trading cuantitativo algorítmico',
+      'Dirige una academia de formación en trading que lleva operando en vivo hace más de 2 años.',
+      'Se enfoca en el largo plazo principalmente en índices americanos',
     ],
   });
 
